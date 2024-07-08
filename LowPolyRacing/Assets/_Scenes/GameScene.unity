@@ -724,6 +724,7 @@ Transform:
   m_Children:
   - {fileID: 2102142883}
   - {fileID: 451659388}
+  - {fileID: 2069375153}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1844802913
@@ -747,11 +748,59 @@ MonoBehaviour:
   drivable:
     serializedVersion: 2
     m_Bits: 64
+  accelerationPoint: {fileID: 2069375153}
   springStiffness: 30000
   damperStiffness: 2500
   restLength: 1
   springTravel: 0.5
   wheelRadius: 0.33
+  acceleration: 25
+  maxSpeed: 100
+  deceleration: 10
+  steerStrength: 30
+  turningCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.06828202
+      value: 0.4603638
+      inSlope: 2.0614526
+      outSlope: 2.0614526
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.096894935
+    - serializedVersion: 3
+      time: 0.67984456
+      value: 0.9953115
+      inSlope: -0.00003153713
+      outSlope: -0.00003153713
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.2818402
+      outWeight: 0.4536978
+    - serializedVersion: 3
+      time: 1.0083313
+      value: 0.83254623
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  dragCoefficient: 1
 --- !u!54 &1844802914
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -761,8 +810,8 @@ Rigidbody:
   m_GameObject: {fileID: 1844802911}
   serializedVersion: 4
   m_Mass: 1000
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 0.2
+  m_AngularDrag: 10
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -778,7 +827,38 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
+--- !u!1 &2069375152
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2069375153}
+  m_Layer: 0
+  m_Name: AccelerationPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2069375153
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069375152}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.28, z: -0.34}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1844802912}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2102142882
 GameObject:
   m_ObjectHideFlags: 0
