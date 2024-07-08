@@ -1117,8 +1117,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1863674, y: 0.08633427, z: -0.016442733, w: 0.97854143}
-  m_LocalPosition: {x: 25.49163, y: 3.34, z: -14.986034}
+  m_LocalRotation: {x: 0.18687232, y: -0.047513023, z: 0.009049055, w: 0.9811928}
+  m_LocalPosition: {x: 17.44026, y: 3.34, z: -43.97851}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1333,7 +1333,7 @@ Transform:
   m_GameObject: {fileID: 366984358}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.05, z: 0}
+  m_LocalPosition: {x: 0, y: -0.01, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6494,7 +6494,7 @@ TrailRenderer:
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.6
+    widthMultiplier: 0.4
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -11438,7 +11438,7 @@ TrailRenderer:
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.6
+    widthMultiplier: 0.4
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -12215,8 +12215,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.7697845, y: 2.7399998, z: 13.156064}
-  m_Center: {x: 0, y: 2.3, z: 0.0069679534}
+  m_Size: {x: 3.7697845, y: 2.7399998, z: 11.680675}
+  m_Center: {x: 0, y: 2.3, z: 0.744663}
 --- !u!1001 &1217334413
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13625,7 +13625,7 @@ Transform:
   m_GameObject: {fileID: 1844802911}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26.67, y: 0.51, z: -8.36}
+  m_LocalPosition: {x: 16.79, y: 0.51, z: -37.28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13673,9 +13673,9 @@ MonoBehaviour:
   skidSmokes:
   - {fileID: 491509549}
   - {fileID: 501802009}
-  springStiffness: 30000
+  springStiffness: 20000
   damperStiffness: 2200
-  restLength: 0.5
+  restLength: 0.25
   springTravel: 0.125
   wheelRadius: 0.5
   acceleration: 35
@@ -13725,9 +13725,13 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   dragCoefficient: 1.25
+  brakingDeceleration: 100
+  brakingDragCoefficient: 0.5
+  gravityForce: -9.81
+  gravityMultiplier: 2
   tireRotSpeed: 5000
   maxSteeringAngle: 30
-  minSideSkidVelocity: 10
+  minSideSkidVelocity: 15
 --- !u!54 &1844802914
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -13892,7 +13896,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1454666217}
@@ -13979,8 +13983,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2034448451}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.18636738, y: 0.086334266, z: -0.016442727, w: 0.97854143}
-  m_LocalPosition: {x: -1.1783695, y: 2.83, z: -6.6260357}
+  m_LocalRotation: {x: 0.1868723, y: -0.047513016, z: 0.009049053, w: 0.9811929}
+  m_LocalPosition: {x: 0.650259, y: 2.83, z: -6.698513}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14210,6 +14214,7 @@ GameObject:
   m_Component:
   - component: {fileID: 543450652592899495}
   - component: {fileID: 1115447886}
+  - component: {fileID: 919132148121820958}
   m_Layer: 0
   m_Name: raceCarGreen
   m_TagString: Untagged
@@ -14217,6 +14222,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!65 &919132148121820958
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148121820957}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.93, y: 0.76, z: 1.38}
+  m_Center: {x: 0, y: 0.81, z: -5.88}
 --- !u!4 &1278253905759724864
 Transform:
   m_ObjectHideFlags: 0

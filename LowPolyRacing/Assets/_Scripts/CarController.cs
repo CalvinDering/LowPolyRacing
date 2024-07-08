@@ -34,6 +34,8 @@ public class CarController : MonoBehaviour {
     [SerializeField] private float dragCoefficient = 1f;
     [SerializeField] private float brakingDeceleration = 100f;
     [SerializeField] private float brakingDragCoefficient = 0.5f;
+    [SerializeField] private float gravityForce = -9.81f;
+    [SerializeField] private float gravityMultiplier = 10f;
 
     private Vector3 currectCarLocalVelocity = Vector3.zero;
     private float carVelocityRatio = 0;
@@ -70,6 +72,8 @@ public class CarController : MonoBehaviour {
             Deceleration();
             Turn();
             SidewaysDrag();
+        } else {
+            DownwardsForce();
         }
     }
 
@@ -96,6 +100,10 @@ public class CarController : MonoBehaviour {
         carRB.AddForceAtPosition(dragForce, carRB.worldCenterOfMass, ForceMode.Acceleration);
     }
 
+    private void DownwardsForce() {
+        carRB.AddForce(Vector3.up * gravityForce * gravityMultiplier, ForceMode.Acceleration);
+    }
+
     #endregion
 
     #region Input
@@ -116,7 +124,7 @@ public class CarController : MonoBehaviour {
             tempGroundedWheels += wheelsIsGrounded[i];
         }
 
-        if(tempGroundedWheels > 1) {
+        if(tempGroundedWheels > 2) {
             isGrounded = true;
         } else {
             isGrounded = false;
