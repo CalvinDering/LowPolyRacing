@@ -11,6 +11,8 @@ public class CarController : MonoBehaviour {
     [SerializeField] private Transform accelerationPoint;
     [SerializeField] private GameObject[] tires = new GameObject[4];
     [SerializeField] private GameObject[] frontTireParents = new GameObject[2];
+    [SerializeField] private TrailRenderer[] skidMarks = new TrailRenderer[2];
+    [SerializeField] private ParticleSystem[] skidSmokes = new ParticleSystem[2];
 
     [Header("Suspension Settings")]
     [SerializeField] private float springStiffness;
@@ -30,6 +32,8 @@ public class CarController : MonoBehaviour {
     [SerializeField] private float steerStrength = 15f;
     [SerializeField] private AnimationCurve turningCurve;
     [SerializeField] private float dragCoefficient = 1f;
+    [SerializeField] private float brakingDeceleration = 100f;
+    [SerializeField] private float brakingDragCoefficient = 0.5f;
 
     private Vector3 currectCarLocalVelocity = Vector3.zero;
     private float carVelocityRatio = 0;
@@ -40,6 +44,7 @@ public class CarController : MonoBehaviour {
     [Header("Visuals")]
     [SerializeField] private float tireRotSpeed = 3000f;
     [SerializeField] private float maxSteeringAngle = 30f;
+    [SerializeField] private float minSideSkidVelocity = 10f;
 
     private void Start() {
         carRB = GetComponent<Rigidbody>();
@@ -69,11 +74,13 @@ public class CarController : MonoBehaviour {
     }
 
     private void Acceleration() {
-        carRB.AddForceAtPosition(acceleration * moveInput * transform.forward, accelerationPoint.position, ForceMode.Acceleration);
+        if(currectCarLocalVelocity.z < maxSpeed) {
+            carRB.AddForceAtPosition(acceleration * moveInput * transform.forward, accelerationPoint.position, ForceMode.Acceleration);
+        }
     }
 
     private void Deceleration() {
-        carRB.AddForceAtPosition(deceleration * moveInput * -transform.forward, accelerationPoint.position, ForceMode.Acceleration);
+        carRB.AddForce((Input.GetKey(KeyCode.Space) ? brakingDeceleration : deceleration) * carVelocityRatio * -carRB.transform.forward, ForceMode.Acceleration);
     }
 
     private void Turn() {
@@ -82,8 +89,7 @@ public class CarController : MonoBehaviour {
 
     private void SidewaysDrag() {
         float currentSidewaysSpeed = currectCarLocalVelocity.x;
-
-        float dragMagnitude = -currentSidewaysSpeed * dragCoefficient;
+        float dragMagnitude = -currentSidewaysSpeed * (Input.GetKey(KeyCode.Space) ? brakingDragCoefficient : dragCoefficient);
 
         Vector3 dragForce = transform.right * dragMagnitude;
 
@@ -175,10 +181,38 @@ public class CarController : MonoBehaviour {
                 tires[i].transform.Rotate(Vector3.right, -tireRotSpeed * moveInput * Time.deltaTime, Space.Self);
             }
         }
+
+        Vfx();
     }
 
     private void SetTirePosition(GameObject tire, Vector3 targetPosition) {
         tire.transform.position = targetPosition;
+    }
+
+    private void Vfx() {
+        if(isGrounded && Mathf.Abs(currectCarLocalVelocity.x) > minSideSkidVelocity && carVelocityRatio > 0) {
+            ToggleSkidMarks(true);
+            ToggleSkidSmokes(true);
+        } else {
+            ToggleSkidMarks(false);
+            ToggleSkidSmokes(false);
+        }
+    }
+
+    private void ToggleSkidMarks(bool toggle) {
+        foreach(TrailRenderer trail in skidMarks) {
+            trail.emitting = toggle;
+        }
+    }
+    
+    private void ToggleSkidSmokes(bool toggle) {
+        foreach(ParticleSystem smoke in skidSmokes) {
+            if(toggle) {
+                smoke.Play();
+            } else {
+                smoke.Stop();
+            }
+        }
     }
 
     #endregion
