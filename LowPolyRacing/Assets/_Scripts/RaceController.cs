@@ -13,22 +13,6 @@ public class RaceController : MonoBehaviour {
     [SerializeField] private int maxLaps = 3;
 
     public static RaceController Instance;
-    /*
-    struct Racer {
-        public int id;
-        public int laps;
-        public int currentCheckpoint;
-
-        public Racer(int id, int laps, int currentCheckpoint) {
-            this.id = id;
-            this.laps = laps;
-            this.currentCheckpoint = currentCheckpoint;
-        }
-
-        public void SetCurrentCheckpoint(int id) {
-            currentCheckpoint = id;
-        }
-    }*/
 
     private void Awake() {
         if(Instance != null) {

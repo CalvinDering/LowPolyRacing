@@ -14,6 +14,8 @@ public class CarController : MonoBehaviour {
     [SerializeField] private GameObject[] frontTireParents = new GameObject[2];
     [SerializeField] private TrailRenderer[] skidMarks = new TrailRenderer[2];
     [SerializeField] private ParticleSystem[] skidSmokes = new ParticleSystem[2];
+    [SerializeField] private AudioSource engineSound;
+    [SerializeField] private AudioSource skidSound;
 
     [Header("Suspension Settings")]
     [SerializeField] private float springStiffness;
@@ -51,6 +53,10 @@ public class CarController : MonoBehaviour {
     [SerializeField] private float maxSteeringAngle = 30f;
     [SerializeField] private float minSideSkidVelocity = 10f;
 
+    [Header("Audio")]
+    [SerializeField] [Range(0, 1)] private float minPitch = 1f;
+    [SerializeField] [Range(1, 5)] private float maxPitch = 5f;
+
     private void Start() {
         carRB = GetComponent<Rigidbody>();
     }
@@ -61,6 +67,7 @@ public class CarController : MonoBehaviour {
         CalculateCarVelocity();
         Movement();
         TireVisuals();
+        EngineSounds();
     }
 
     private void Update() {
@@ -208,9 +215,11 @@ public class CarController : MonoBehaviour {
         if(isGrounded && Mathf.Abs(currectCarLocalVelocity.x) > minSideSkidVelocity && carVelocityRatio > 0) {
             ToggleSkidMarks(true);
             ToggleSkidSmokes(true);
+            ToggleSkidSounds(true);
         } else {
             ToggleSkidMarks(false);
             ToggleSkidSmokes(false);
+            ToggleSkidSounds(false);
         }
     }
 
@@ -228,6 +237,14 @@ public class CarController : MonoBehaviour {
                 smoke.Stop();
             }
         }
+    }
+
+    private void ToggleSkidSounds(bool toggle) {
+        skidSound.mute = !toggle;
+    }
+
+    private void EngineSounds() {
+        engineSound.pitch = Mathf.Lerp(minPitch, maxPitch, Mathf.Abs(carVelocityRatio));
     }
 
     #endregion
