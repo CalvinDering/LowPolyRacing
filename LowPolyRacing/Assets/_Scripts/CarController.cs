@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,11 +23,13 @@ public class CarController : MonoBehaviour {
     [SerializeField] private float wheelRadius;
 
     [Header("Input")]
+    public RacerSO racerSO;
     private float moveInput = 0;
     private float steerInput = 0;
 
     [Header("Car Settings")]
     [SerializeField] private float acceleration = 25f;
+
     [SerializeField] private float maxSpeed = 100f;
     [SerializeField] private float deceleration = 10f;
     [SerializeField] private float steerStrength = 15f;
@@ -228,4 +231,12 @@ public class CarController : MonoBehaviour {
     }
 
     #endregion
+
+    public void SetId(int id) {
+        racerSO.id = id;
+    }
+
+    public int GetId() {
+        return racerSO.id;
+    }
 }
