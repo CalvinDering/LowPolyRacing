@@ -4564,7 +4564,7 @@ MonoBehaviour:
   acceleration: 35
   maxSpeed: 100
   deceleration: 20
-  steerStrength: 40
+  steerStrength: 30
   turningCurve:
     serializedVersion: 2
     m_Curve:
@@ -4607,12 +4607,12 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  dragCoefficient: 1.25
+  dragCoefficient: 2.5
   brakingDeceleration: 100
   brakingDragCoefficient: 0.5
   gravityForce: -9.81
   gravityMultiplier: 2
-  tireRotSpeed: 2000
+  tireRotSpeed: 3000
   maxSteeringAngle: 30
   minSideSkidVelocity: 15
 --- !u!54 &1844802914
@@ -4625,7 +4625,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1000
   m_Drag: 0.2
-  m_AngularDrag: 25
+  m_AngularDrag: 15
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
