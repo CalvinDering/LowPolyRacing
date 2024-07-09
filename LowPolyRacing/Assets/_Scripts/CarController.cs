@@ -182,11 +182,15 @@ public class CarController : MonoBehaviour {
 
         for(int i = 0; i < tires.Length; i++) {
             if(i < 2) {
-                tires[i].transform.Rotate(Vector3.right, -tireRotSpeed * carVelocityRatio * Time.deltaTime, Space.Self);
+                tires[i].transform.Rotate(Vector3.right, tireRotSpeed * carVelocityRatio * Time.deltaTime, Space.Self);
 
                 frontTireParents[i].transform.localEulerAngles = new Vector3(frontTireParents[i].transform.localEulerAngles.x, steeringAngle, frontTireParents[i].transform.localEulerAngles.z);
             } else {
-                tires[i].transform.Rotate(Vector3.right, -tireRotSpeed * moveInput * Time.deltaTime, Space.Self);
+                if(moveInput == 0) {
+                    tires[i].transform.Rotate(Vector3.right, tireRotSpeed * carVelocityRatio * Time.deltaTime, Space.Self);
+                } else {
+                    tires[i].transform.Rotate(Vector3.right, tireRotSpeed * moveInput * Time.deltaTime, Space.Self);
+                }
             }
         }
 
