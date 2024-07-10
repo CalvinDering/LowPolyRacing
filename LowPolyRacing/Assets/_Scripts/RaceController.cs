@@ -2,15 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using TMPro;
 
 public class RaceController : MonoBehaviour {
 
     [Header("References")]
     [SerializeField] private List<GameObject> checkpoints;
     [SerializeField] private List<RacerSO> racers;
+    [SerializeField] private TextMeshProUGUI countdownTimerText;
 
     [Header("Race Settings")]
+    [SerializeField] private float raceCountdownTimer = 5f;
+    [SerializeField] private float raceCountdownFadeOutTimer = 0.5f;
+    [SerializeField] private string raceStartText = "GOOOO!";
     [SerializeField] private int maxLaps = 3;
+
+    private bool setupFinished = false;
+
+    private float onceSecondTimer;
+    public static float ONCE_PER_SECOND_INTERVAL = 1f;
 
     public static RaceController Instance;
 
@@ -22,6 +32,50 @@ public class RaceController : MonoBehaviour {
 
         SetupCheckpoints();
         SetupPlayers();
+    }
+
+    private void Update() {
+        if(setupFinished) {
+            if(raceCountdownTimer > 0) {
+                raceCountdownTimer -= Time.deltaTime;
+
+                if(Time.time >= onceSecondTimer) {
+                    onceSecondTimer += ONCE_PER_SECOND_INTERVAL;
+                    DisplayCountdownTime(raceCountdownTimer);
+                    Debug.Log(raceCountdownTimer);
+                }
+            } else {
+                DisplayCountdownTime(raceCountdownTimer);
+                setupFinished = false;
+                StartRace();
+            }
+        }
+    }
+
+    private void StartRace() {
+        foreach(RacerSO racer in racers) {
+            racer.controller.SetIsActive(true);
+        }
+    }
+
+    private void DisplayCountdownTime(float raceCountdownTimer) {
+        int seconds = Mathf.FloorToInt((raceCountdownTimer + 1) % 60);
+
+        if(seconds <= 0) {
+            countdownTimerText.text = raceStartText;
+            StartCoroutine(FadeTextToZeroAlpha(raceCountdownFadeOutTimer, countdownTimerText));
+        } else {
+            countdownTimerText.text = seconds.ToString();
+            StartCoroutine(FadeTextToZeroAlpha(raceCountdownFadeOutTimer, countdownTimerText));
+        }
+    }
+
+    private IEnumerator FadeTextToZeroAlpha(float timer, TextMeshProUGUI text) {
+        text.color = new Color(text.color.r, text.color.g, text.color.b);
+        while(text.color.a > 0.0f) {
+            text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a - (Time.deltaTime / timer));
+            yield return null;
+        }
     }
 
     private void SetupCheckpoints() {
@@ -36,9 +90,14 @@ public class RaceController : MonoBehaviour {
         for(int i = 0; i < players.Length; i++) {
             racers.Add(players[i].racerSO);
             players[i].racerSO.id = i;
+            players[i].racerSO.controller = players[i];
             players[i].racerSO.laps = 1;
             players[i].racerSO.currentCheckpoint = 0;
+
+            players[i].SetIsActive(false);
         }
+
+        setupFinished = true;
     }
 
     public void CarThroughCheckpoint(CarController car, Checkpoint checkpoint) {
@@ -54,7 +113,7 @@ public class RaceController : MonoBehaviour {
 
                     if(racer.laps > maxLaps) {
                         // Race won
-                        car.enabled = false;
+                        car.SetIsActive(false);
                     }
                 }
             }

@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Racer")]
 public class RacerSO : ScriptableObject {
     public int id;
+    public CarController controller;
     public int laps;
     public int currentCheckpoint;
 

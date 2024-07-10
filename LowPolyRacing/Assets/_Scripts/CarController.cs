@@ -47,6 +47,7 @@ public class CarController : MonoBehaviour {
 
     private int[] wheelsIsGrounded = new int[4];
     private bool isGrounded = false;
+    private bool isActive = false;
 
     [Header("Visuals")]
     [SerializeField] private float tireRotSpeed = 3000f;
@@ -71,7 +72,13 @@ public class CarController : MonoBehaviour {
     }
 
     private void Update() {
-        GetPlayerInput();
+        if(isActive) {
+            GetPlayerInput();
+        }
+    }
+
+    public void SetIsActive(bool isActive) {
+        this.isActive = isActive;
     }
 
     #region Movement
