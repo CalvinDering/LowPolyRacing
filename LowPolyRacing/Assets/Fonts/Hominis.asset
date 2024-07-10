@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: Hominis
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: 1618259575
   material: {fileID: 1944257627438291905}
-  materialHashCode: 0
+  materialHashCode: 1037519479
   m_Version: 1.1.0
   m_SourceFontFileGUID: 1465fd61fdebfed46a006b8e6776c19f
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 1465fd61fdebfed46a006b8e6776c19f,
@@ -1878,7 +1878,7 @@ MonoBehaviour:
     atlasHeight: 2048
     characterSetSelectionMode: 0
     characterSequence: 32 - 126, 160, 8203, 8230, 9633
-    referencedFontAssetGUID: 
+    referencedFontAssetGUID: 78fef192b7cc87f42b1ce9ca68123332
     referencedTextAssetGUID: 
     fontStyle: 0
     fontStyleModifier: 0

@@ -12,6 +12,7 @@ public class RaceController : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI countdownTimerText;
     [SerializeField] private TextMeshProUGUI lapCounterText;
     [SerializeField] private TextMeshProUGUI checkpointCounterText;
+    [SerializeField] private TextMeshProUGUI raceFinishedText;
 
     [Header("Race Settings")]
     [SerializeField] private float raceCountdownTimer = 5f;
@@ -20,6 +21,8 @@ public class RaceController : MonoBehaviour {
     [SerializeField] private int maxLaps = 3;
 
     private bool setupFinished = false;
+    private bool raceFinished = false;
+    private int racingCars = 0;
 
     private float onceSecondTimer;
     public static float ONCE_PER_SECOND_INTERVAL = 1f;
@@ -32,6 +35,8 @@ public class RaceController : MonoBehaviour {
         }
         Instance = this;
 
+        raceFinished = false;
+        raceFinishedText.enabled = false;
         SetupCheckpoints();
         SetupPlayers();
     }
@@ -57,6 +62,9 @@ public class RaceController : MonoBehaviour {
         foreach(RacerSO racer in racers) {
             racer.controller.SetIsActive(true);
         }
+    }
+    public bool IsRaceFinished() {
+        return raceFinished;
     }
 
     private void DisplayCountdownTime(float raceCountdownTimer) {
@@ -96,6 +104,7 @@ public class RaceController : MonoBehaviour {
             players[i].racerSO.currentCheckpoint = 0;
 
             DisplayRaceStats(players[i].racerSO.laps, players[i].racerSO.currentCheckpoint);
+            racingCars++;
 
             players[i].SetIsActive(false);
         }
@@ -119,6 +128,12 @@ public class RaceController : MonoBehaviour {
                 if(racer.laps > maxLaps) {
                     // Race won
                     car.SetIsActive(false);
+                    racingCars--;
+
+                    if(racingCars <= 0) {
+                        raceFinished = true;
+                        DisplayFinishedRace();
+                    }
                 }
             }
         }
@@ -128,6 +143,10 @@ public class RaceController : MonoBehaviour {
 
         lapCounterText.text = "Laps: " + laps.ToString() + " / " + maxLaps;
         checkpointCounterText.text = "CP: " + checkpoint.ToString() + " / " + (checkpoints.Count - 1);
+    }
+
+    private void DisplayFinishedRace() {
+        raceFinishedText.enabled = true;
     }
 
 }

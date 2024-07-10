@@ -77,6 +77,10 @@ public class CarController : MonoBehaviour {
         } else {
             SetZeroInput();
         }
+
+        if(RaceController.Instance.IsRaceFinished() && Input.GetKeyDown(KeyCode.Escape)) {
+            SceneHandler.Instance.LoadMenuScene();
+        }
     }
 
     public void SetIsActive(bool isActive) {
