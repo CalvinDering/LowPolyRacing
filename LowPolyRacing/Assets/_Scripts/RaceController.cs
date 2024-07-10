@@ -121,21 +121,21 @@ public class RaceController : MonoBehaviour {
                 racer.SetCurrentCheckpoint(checkpointId);
 
                 if(checkpoint.IsFinish()) {
-                    racer.laps++;
+                    if(racer.laps >= maxLaps) {
+                        // Race won
+                        car.SetIsActive(false);
+                        racingCars--;
+
+                        if(racingCars <= 0) {
+                            raceFinished = true;
+                            DisplayFinishedRace();
+                        }
+                    } else {
+                        racer.laps++;
+                    }
                 }
 
                 DisplayRaceStats(racer.laps, racer.currentCheckpoint);
-
-                if(racer.laps > maxLaps) {
-                    // Race won
-                    car.SetIsActive(false);
-                    racingCars--;
-
-                    if(racingCars <= 0) {
-                        raceFinished = true;
-                        DisplayFinishedRace();
-                    }
-                }
             }
         }
     }
