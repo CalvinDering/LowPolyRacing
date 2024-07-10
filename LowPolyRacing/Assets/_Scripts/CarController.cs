@@ -134,6 +134,10 @@ public class CarController : MonoBehaviour {
         carRB.AddForce(Vector3.up * gravityForce * gravityMultiplier, ForceMode.Acceleration);
     }
 
+    public Vector3 GetCurrentCarLocalVelocity() {
+        return currectCarLocalVelocity;
+    }
+
     #endregion
 
     #region Input

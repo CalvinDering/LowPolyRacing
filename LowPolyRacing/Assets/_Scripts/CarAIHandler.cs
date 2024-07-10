@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class CarAIHandler : MonoBehaviour {
 
@@ -11,14 +12,19 @@ public class CarAIHandler : MonoBehaviour {
 
     [Header("AI Settings")]
     public AIMode aiMode;
+    public float maxSpeed = 100;
 
     private Vector3 targetPosition = Vector3.zero;
     private Transform targetTransform = null;
+
+    private WaypointNode currentWaypoint = null;
+    private WaypointNode[] allWaypoints;
 
     private CarController controller;
 
     private void Awake() {
         controller = GetComponent<CarController>();
+        allWaypoints = FindObjectsOfType<WaypointNode>();
     }
 
     private void FixedUpdate() {
@@ -33,8 +39,8 @@ public class CarAIHandler : MonoBehaviour {
                 break;
         }
 
-        inputVector.x = 1f;
         inputVector.y = TurnTowardTarget();
+        inputVector.x = ApplyThrottleOrBrake(inputVector.y);
 
 
         controller.SetInput(inputVector);
@@ -51,7 +57,37 @@ public class CarAIHandler : MonoBehaviour {
     }
 
     private void FollowWaypoints() {
-    
+        if(currentWaypoint == null) {
+            currentWaypoint = FindClosestWaypoint();
+        }
+
+        if(currentWaypoint != null) {
+            targetPosition = currentWaypoint.transform.position;
+
+            float distanceToWaypoint = (targetPosition - transform.position).magnitude;
+
+            if(distanceToWaypoint <= currentWaypoint.minDistanceToReachWaypoint) {
+                if(currentWaypoint.maxSpeed > 0) {
+                    maxSpeed = currentWaypoint.maxSpeed;
+                } else {
+                    maxSpeed = 1000;
+                }
+
+                currentWaypoint = currentWaypoint.nextWaypointNode[Random.Range(0, currentWaypoint.nextWaypointNode.Length)];
+            }
+        }
+
+    }
+
+    private WaypointNode FindClosestWaypoint() {
+        return allWaypoints.OrderBy(w => Vector3.Distance(transform.position, w.transform.position)).FirstOrDefault();
+    }
+
+    private float ApplyThrottleOrBrake(float steering) {
+        if(controller.GetCurrentCarLocalVelocity().z > maxSpeed) {
+            return 0;
+        }
+        return 1.20f - Mathf.Abs(steering) / 1.0f;
     }
 
     private float TurnTowardTarget() {
