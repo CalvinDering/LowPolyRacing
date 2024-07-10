@@ -10,6 +10,8 @@ public class RaceController : MonoBehaviour {
     [SerializeField] private List<GameObject> checkpoints;
     [SerializeField] private List<RacerSO> racers;
     [SerializeField] private TextMeshProUGUI countdownTimerText;
+    [SerializeField] private TextMeshProUGUI lapCounterText;
+    [SerializeField] private TextMeshProUGUI checkpointCounterText;
 
     [Header("Race Settings")]
     [SerializeField] private float raceCountdownTimer = 5f;
@@ -93,6 +95,8 @@ public class RaceController : MonoBehaviour {
             players[i].racerSO.laps = 1;
             players[i].racerSO.currentCheckpoint = 0;
 
+            DisplayRaceStats(players[i].racerSO.laps, players[i].racerSO.currentCheckpoint);
+
             players[i].SetIsActive(false);
         }
 
@@ -107,16 +111,23 @@ public class RaceController : MonoBehaviour {
                 racer.SetCurrentCheckpoint(checkpointId);
 
                 if(checkpoint.IsFinish()) {
-
                     racer.laps++;
+                }
 
-                    if(racer.laps > maxLaps) {
-                        // Race won
-                        car.SetIsActive(false);
-                    }
+                DisplayRaceStats(racer.laps, racer.currentCheckpoint);
+
+                if(racer.laps > maxLaps) {
+                    // Race won
+                    car.SetIsActive(false);
                 }
             }
         }
+    }
+
+    private void DisplayRaceStats(int laps, int checkpoint) {
+
+        lapCounterText.text = "Laps: " + laps.ToString() + " / " + maxLaps;
+        checkpointCounterText.text = "CP: " + checkpoint.ToString() + " / " + (checkpoints.Count - 1);
     }
 
 }
