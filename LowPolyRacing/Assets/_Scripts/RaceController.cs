@@ -36,8 +36,8 @@ public class RaceController : MonoBehaviour {
         for(int i = 0; i < players.Length; i++) {
             racers.Add(players[i].racerSO);
             players[i].racerSO.id = i;
-            players[i].racerSO.laps = 0;
-            players[i].racerSO.currentCheckpoint = -1;
+            players[i].racerSO.laps = 1;
+            players[i].racerSO.currentCheckpoint = 0;
         }
     }
 
