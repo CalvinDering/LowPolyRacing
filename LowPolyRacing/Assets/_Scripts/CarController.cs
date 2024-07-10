@@ -73,7 +73,9 @@ public class CarController : MonoBehaviour {
 
     private void Update() {
         if(isActive) {
-            GetPlayerInput();
+            GetInput();
+        } else {
+            SetZeroInput();
         }
     }
 
@@ -125,9 +127,14 @@ public class CarController : MonoBehaviour {
 
     #region Input
 
-    private void GetPlayerInput() {
+    private void GetInput() {
         moveInput = Input.GetAxis("Vertical");
         steerInput = Input.GetAxis("Horizontal");
+    }
+
+    private void SetZeroInput() {
+        moveInput = 0;
+        steerInput = 0;
     }
 
     #endregion
