@@ -42,7 +42,6 @@ public class RaceController : MonoBehaviour {
                 if(Time.time >= onceSecondTimer) {
                     onceSecondTimer += ONCE_PER_SECOND_INTERVAL;
                     DisplayCountdownTime(raceCountdownTimer);
-                    Debug.Log(raceCountdownTimer);
                 }
             } else {
                 DisplayCountdownTime(raceCountdownTimer);
