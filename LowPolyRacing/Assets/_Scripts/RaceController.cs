@@ -30,8 +30,9 @@ public class RaceController : MonoBehaviour {
     public static RaceController Instance;
 
     private void Awake() {
-        if(Instance != null) {
+        if(Instance != null && Instance != null) {
             Destroy(this);
+            return;
         }
         Instance = this;
 

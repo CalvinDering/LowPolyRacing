@@ -9,9 +9,13 @@ public class SoundFXManager : MonoBehaviour {
     [SerializeField] private AudioSource soundFXObject;
 
     private void Awake() {
-        if(Instance == null) {
-            Instance = this;
+        if(Instance != this && Instance != null) {
+            Destroy(this);
+            return;
         }
+
+        Instance = this;
+        DontDestroyOnLoad(this);
     }
 
     public void PlaySoundFXClip(AudioClip audioClip, Transform spawnTransform, float volume, float pitch = 1f) {
