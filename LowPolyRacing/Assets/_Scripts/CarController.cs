@@ -12,6 +12,7 @@ public class CarController : MonoBehaviour {
     [SerializeField] private Transform accelerationPoint;
     [SerializeField] private GameObject[] tires = new GameObject[4];
     [SerializeField] private GameObject[] frontTireParents = new GameObject[2];
+
     [SerializeField] private TrailRenderer[] skidMarks = new TrailRenderer[2];
     [SerializeField] private ParticleSystem[] skidSmokes = new ParticleSystem[2];
     [SerializeField] private AudioSource engineSound;
@@ -25,7 +26,7 @@ public class CarController : MonoBehaviour {
     [SerializeField] private float wheelRadius;
 
     [Header("Input")]
-    public RacerSO racerSO;
+    public Racer racer;
     private float moveInput = 0;
     private float steerInput = 0;
 
@@ -58,8 +59,15 @@ public class CarController : MonoBehaviour {
     [SerializeField] [Range(0, 1)] private float minPitch = 1f;
     [SerializeField] [Range(1, 5)] private float maxPitch = 5f;
 
-    private void Start() {
+    private void Awake() {
         carRB = GetComponent<Rigidbody>();
+
+        if(gameObject.tag == "Player") {
+
+        } else if(gameObject.tag == "AI") {
+        
+        }
+        racer = GetComponent<Racer>();
     }
 
     private void FixedUpdate() {
@@ -72,11 +80,6 @@ public class CarController : MonoBehaviour {
     }
 
     private void Update() {
-        if(isActive) {
-            GetInput();
-        } else {
-            SetZeroInput();
-        }
 
         if(RaceController.Instance.IsRaceFinished() && Input.GetKeyDown(KeyCode.Escape)) {
             SceneHandler.Instance.LoadMenuScene();
@@ -90,6 +93,10 @@ public class CarController : MonoBehaviour {
     #region Movement
 
     private void Movement() {
+        if(!isActive) {
+            SetZeroInput();
+        }
+
         if(isGrounded) {
             Acceleration();
             Deceleration();
@@ -131,9 +138,9 @@ public class CarController : MonoBehaviour {
 
     #region Input
 
-    private void GetInput() {
-        moveInput = Input.GetAxis("Vertical");
-        steerInput = Input.GetAxis("Horizontal");
+    public void SetInput(Vector2 input) {
+        moveInput = input.x;
+        steerInput = input.y;
     }
 
     private void SetZeroInput() {
@@ -267,11 +274,4 @@ public class CarController : MonoBehaviour {
 
     #endregion
 
-    public void SetId(int id) {
-        racerSO.id = id;
-    }
-
-    public int GetId() {
-        return racerSO.id;
-    }
 }
