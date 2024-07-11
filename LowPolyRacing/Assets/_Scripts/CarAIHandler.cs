@@ -122,8 +122,10 @@ public class CarAIHandler : MonoBehaviour {
         }
 
         float reduceSpeedDueToCornering = Mathf.Abs(steering) / 1.0f;
+        float acceleration = 1.20f - reduceSpeedDueToCornering * skillLevel;
+        acceleration = Mathf.Clamp(acceleration, 0f, 1f);
 
-        return 1.25f - reduceSpeedDueToCornering * skillLevel;
+        return acceleration;
     }
 
     private void SetMaxSpeedBasedOnSkill(float newSpeed = 1000) {
