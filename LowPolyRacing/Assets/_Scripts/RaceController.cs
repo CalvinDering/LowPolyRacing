@@ -13,6 +13,7 @@ public class RaceController : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI lapCounterText;
     [SerializeField] private TextMeshProUGUI checkpointCounterText;
     [SerializeField] private TextMeshProUGUI raceFinishedText;
+    [SerializeField] private AudioClip[] countdownSound;
 
     [Header("Race Settings")]
     [SerializeField] private float raceCountdownTimer = 5f;
@@ -42,6 +43,7 @@ public class RaceController : MonoBehaviour {
         raceFinishedText.enabled = false;
         SetupCheckpoints();
         SetupPlayers();
+        onceSecondTimer = Time.time;
     }
 
     private void Update() {
@@ -73,12 +75,15 @@ public class RaceController : MonoBehaviour {
     private void DisplayCountdownTime(float raceCountdownTimer) {
         int seconds = Mathf.FloorToInt((raceCountdownTimer + 1) % 60);
 
+        Debug.Log(seconds);
         if(seconds <= 0) {
             countdownTimerText.text = raceStartText;
             StartCoroutine(FadeTextToZeroAlpha(raceCountdownFadeOutTimer, countdownTimerText));
+            SoundFXManager.Instance.PlaySoundFXClip(countdownSound[0], transform, 1f);
         } else {
             countdownTimerText.text = seconds.ToString();
             StartCoroutine(FadeTextToZeroAlpha(raceCountdownFadeOutTimer, countdownTimerText));
+            SoundFXManager.Instance.PlaySoundFXClip(countdownSound[seconds], transform, 1f);
         }
     }
 

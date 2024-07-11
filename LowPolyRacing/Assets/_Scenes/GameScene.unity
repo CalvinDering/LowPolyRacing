@@ -2208,6 +2208,13 @@ MonoBehaviour:
   lapCounterText: {fileID: 57459192}
   checkpointCounterText: {fileID: 875526402}
   raceFinishedText: {fileID: 2015708372}
+  countdownSound:
+  - {fileID: 8300000, guid: b7d5f994d92fb72409cb49c216fe53d0, type: 3}
+  - {fileID: 8300000, guid: 2dc8be7194b7fc4488ad7835c7b8ffc0, type: 3}
+  - {fileID: 8300000, guid: b09e693f9fdffda45b5123992de4fd87, type: 3}
+  - {fileID: 8300000, guid: cada7a3402227db4088dc103c5483ae1, type: 3}
+  - {fileID: 8300000, guid: b2c65f5142ad67046a9f1191a9dbe2b8, type: 3}
+  - {fileID: 8300000, guid: 8313ea54e9bf4864ebf3c7f77634f388, type: 3}
   raceCountdownTimer: 5
   raceCountdownFadeOutTimer: 1
   raceStartText: GOOOO
