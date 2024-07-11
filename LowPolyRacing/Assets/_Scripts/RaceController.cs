@@ -75,15 +75,18 @@ public class RaceController : MonoBehaviour {
     private void DisplayCountdownTime(float raceCountdownTimer) {
         int seconds = Mathf.FloorToInt((raceCountdownTimer + 1) % 60);
 
-        Debug.Log(seconds);
         if(seconds <= 0) {
             countdownTimerText.text = raceStartText;
             StartCoroutine(FadeTextToZeroAlpha(raceCountdownFadeOutTimer, countdownTimerText));
-            SoundFXManager.Instance.PlaySoundFXClip(countdownSound[0], transform, 1f);
+            if(SoundFXManager.Instance != null) {
+                SoundFXManager.Instance.PlaySoundFXClip(countdownSound[0], transform, 1f);
+            }
         } else {
             countdownTimerText.text = seconds.ToString();
             StartCoroutine(FadeTextToZeroAlpha(raceCountdownFadeOutTimer, countdownTimerText));
-            SoundFXManager.Instance.PlaySoundFXClip(countdownSound[seconds], transform, 1f);
+            if(SoundFXManager.Instance != null) {
+                SoundFXManager.Instance.PlaySoundFXClip(countdownSound[seconds], transform, 1f);
+            }
         }
     }
 
