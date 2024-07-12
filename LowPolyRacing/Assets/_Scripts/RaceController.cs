@@ -36,6 +36,8 @@ public class RaceController : MonoBehaviour {
             return;
         }
         Instance = this;
+
+        maxLaps = TrackSelectionUIHandler.Instance.selectedTrackLaps;
     }
 
     private void Start() {

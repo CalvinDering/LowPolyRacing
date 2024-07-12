@@ -35,7 +35,15 @@ public class SceneHandler : MonoBehaviour {
     }
 
     public void LoadGameScene() {
-        SceneManager.LoadScene(GameSceneIndex);
+        LoadTrackScene(TrackSelectionUIHandler.Instance.selectedTrackId);
+    }
+
+    public void LoadTrackScene(int trackId) {
+        int trackSceneIndex = GameSceneIndex + trackId;
+        if(trackSceneIndex >= SceneManager.sceneCountInBuildSettings) {
+            trackSceneIndex = GameSceneIndex;
+        } 
+        SceneManager.LoadScene(trackSceneIndex);
         MusicManager.Instance.PlayGameMusic();
     }
 }
