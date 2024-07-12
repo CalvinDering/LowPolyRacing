@@ -114,7 +114,7 @@ public class CarController : MonoBehaviour {
     }
 
     private void Deceleration() {
-        carRB.AddForce((Input.GetKey(KeyCode.Space) ? brakingDeceleration : deceleration) * carVelocityRatio * -carRB.transform.forward, ForceMode.Acceleration);
+        carRB.AddForce((handbrakeActive ? brakingDeceleration : deceleration) * carVelocityRatio * -carRB.transform.forward, ForceMode.Acceleration);
     }
 
     private void Turn() {
@@ -154,7 +154,6 @@ public class CarController : MonoBehaviour {
 
     public void SetHandbrake(bool value) {
         handbrakeActive = value;
-        Debug.Log(handbrakeActive);
     }
 
     #endregion
