@@ -167,4 +167,10 @@ public class RaceController : MonoBehaviour {
         raceFinishedText.enabled = true;
     }
 
+    public void PauseCarSounds(bool isPaused) {
+        foreach(Racer racer in racers) {
+            racer.GetController().PauseCarSounds(isPaused);
+        }
+    }
+
 }

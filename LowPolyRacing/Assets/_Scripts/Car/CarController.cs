@@ -13,6 +13,8 @@ public class CarController : MonoBehaviour {
     [SerializeField] private GameObject[] tires = new GameObject[4];
     [SerializeField] private GameObject[] frontTireParents = new GameObject[2];
 
+    private CarInputHandler inputHandler = null;
+
     [SerializeField] private TrailRenderer[] skidMarks = new TrailRenderer[2];
     [SerializeField] private ParticleSystem[] skidSmokes = new ParticleSystem[2];
     [SerializeField] private AudioSource engineSound;
@@ -68,6 +70,8 @@ public class CarController : MonoBehaviour {
         } else if(gameObject.tag == "AI") {
         
         }
+
+        TryGetComponent(out inputHandler);
     }
 
     private void FixedUpdate() {
@@ -81,9 +85,11 @@ public class CarController : MonoBehaviour {
 
     private void Update() {
 
-        if(RaceController.Instance.IsRaceFinished() && Input.GetKeyDown(KeyCode.Escape)) {
-            SceneHandler.Instance.LoadMenuScene();
-        }
+        if(inputHandler != null) {
+            if(RaceController.Instance.IsRaceFinished() && inputHandler.exit.triggered) {
+                SceneHandler.Instance.LoadMenuScene();
+            }
+        }        
     }
 
     public void SetIsActive(bool isActive) {
@@ -278,6 +284,16 @@ public class CarController : MonoBehaviour {
 
     private void EngineSounds() {
         engineSound.pitch = Mathf.Lerp(minPitch, maxPitch, Mathf.Abs(carVelocityRatio));
+    }
+
+    public void PauseCarSounds(bool isPaused) {
+        if(isPaused) {
+            skidSound.Pause();
+            engineSound.Pause();
+        } else {
+            skidSound.Play();
+            engineSound.Play();
+        }
     }
 
     #endregion

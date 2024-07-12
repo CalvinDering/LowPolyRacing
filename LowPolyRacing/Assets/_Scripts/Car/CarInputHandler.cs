@@ -11,6 +11,9 @@ public class CarInputHandler : MonoBehaviour {
     private InputAction steer;
     private InputAction handbrake;
 
+    public InputAction pause;
+    public InputAction exit;
+
     public int playerNumber = 1;
 
     CarController carController;
@@ -23,6 +26,14 @@ public class CarInputHandler : MonoBehaviour {
     }
 
     private void Update() {
+        if(pause.triggered) {
+            PauseUIHandler.Instance.TogglePause();
+        }
+
+        if(PauseUIHandler.Instance.IsPaused()) {
+            return;
+        }
+
         Vector2 inputVector = Vector2.zero;
 
         inputVector.x = accelerate.ReadValue<float>();
@@ -35,6 +46,8 @@ public class CarInputHandler : MonoBehaviour {
         accelerate = player.FindAction("Accelerate");
         steer = player.FindAction("Steer");
         handbrake = player.FindAction("Handbrake");
+        pause = player.FindAction("Pause");
+        exit = player.FindAction("Exit");
 
         handbrake.started += context => carController.SetHandbrake(true);
         handbrake.canceled += context => carController.SetHandbrake(false);
