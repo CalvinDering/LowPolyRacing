@@ -8,7 +8,7 @@ public class RaceController : MonoBehaviour {
 
     [Header("References")]
     [SerializeField] private List<GameObject> checkpoints;
-    [SerializeField] private List<Racer> racers;
+    [SerializeField] private List<Racer> racers = new List<Racer>();
     [SerializeField] private TextMeshProUGUI countdownTimerText;
     [SerializeField] private TextMeshProUGUI lapCounterText;
     [SerializeField] private TextMeshProUGUI checkpointCounterText;
@@ -105,24 +105,27 @@ public class RaceController : MonoBehaviour {
     }
 
     private void SetupPlayers() {
-        racers = new List<Racer>();
         CarController[] players = FindObjectsOfType<CarController>();
         for(int i = 0; i < players.Length; i++) {
 
-            Racer racer = players[i].racer;
-            racer.SetId(i);
-            racer.SetLaps(1);
-            racer.SetCurrentCheckpoint(0);
-            //Racer racer = new Racer(i, players[i]);
-            racers.Add(racer);
-
-            DisplayRaceStats(racer.GetLaps(), racer.GetCurrentCheckpoint());
-            racingCars++;
-
-            players[i].SetIsActive(false);
+            AddRacer(players[i]);
         }
 
         setupFinished = true;
+    }
+
+    public void AddRacer(CarController controller) {
+        Racer racer = controller.GetComponent<Racer>();
+        racer.SetId(racers.Count);
+        racer.SetLaps(1);
+        racer.SetCurrentCheckpoint(0);
+        controller.racer = racer;
+        racers.Add(racer);
+
+        DisplayRaceStats(racer.GetLaps(), racer.GetCurrentCheckpoint());
+        racingCars++;
+
+        controller.SetIsActive(false);
     }
 
     public void CarThroughCheckpoint(CarController car, Checkpoint checkpoint) {

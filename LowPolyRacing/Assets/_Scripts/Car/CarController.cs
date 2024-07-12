@@ -49,6 +49,7 @@ public class CarController : MonoBehaviour {
     private int[] wheelsIsGrounded = new int[4];
     private bool isGrounded = false;
     private bool isActive = false;
+    private bool handbrakeActive = false;
 
     [Header("Visuals")]
     [SerializeField] private float tireRotSpeed = 3000f;
@@ -67,7 +68,6 @@ public class CarController : MonoBehaviour {
         } else if(gameObject.tag == "AI") {
         
         }
-        racer = GetComponent<Racer>();
     }
 
     private void FixedUpdate() {
@@ -123,7 +123,7 @@ public class CarController : MonoBehaviour {
 
     private void SidewaysDrag() {
         float currentSidewaysSpeed = currectCarLocalVelocity.x;
-        float dragMagnitude = -currentSidewaysSpeed * (Input.GetKey(KeyCode.Space) ? brakingDragCoefficient : dragCoefficient);
+        float dragMagnitude = -currentSidewaysSpeed * (handbrakeActive ? brakingDragCoefficient : dragCoefficient);
 
         Vector3 dragForce = transform.right * dragMagnitude;
 
@@ -150,6 +150,11 @@ public class CarController : MonoBehaviour {
     private void SetZeroInput() {
         moveInput = 0;
         steerInput = 0;
+    }
+
+    public void SetHandbrake(bool value) {
+        handbrakeActive = value;
+        Debug.Log(handbrakeActive);
     }
 
     #endregion

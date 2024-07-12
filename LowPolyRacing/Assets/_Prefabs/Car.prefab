@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8140138851446844502}
   - component: {fileID: 5508467737915786748}
   - component: {fileID: 4267460694665224457}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CarBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 5066770706291709472}
   - component: {fileID: 2547941948921690598}
   - component: {fileID: 3824425153178970302}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Exotic_01_Door_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: 964536091760297412}
   - component: {fileID: 1983729894665170544}
   - component: {fileID: 3309734224963861857}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Attach_Wheel_01_FR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -310,7 +310,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1111570503294191919}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -344,7 +344,7 @@ GameObject:
   - component: {fileID: 7870053844900481096}
   - component: {fileID: 1387889910440812760}
   - component: {fileID: 493992738002625692}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Attach_Gear_Stick_02 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -427,7 +427,7 @@ GameObject:
   - component: {fileID: 6351579806042254133}
   - component: {fileID: 6209709595715025730}
   - component: {fileID: 6988307997548954352}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_attach_Fire_Extinguisher_Bracket_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -510,7 +510,7 @@ GameObject:
   - component: {fileID: 7452027021618924899}
   - component: {fileID: 8635935674640150564}
   - component: {fileID: 2201913464883170374}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Attach_Wiper_01 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -594,7 +594,7 @@ GameObject:
   - component: {fileID: 253727831924179783}
   - component: {fileID: 5055698754194120965}
   - component: {fileID: 2877054020980081762}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Exotic_01_Door_R_Glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -677,7 +677,7 @@ GameObject:
   - component: {fileID: 6318429503987279504}
   - component: {fileID: 3375362904556854916}
   - component: {fileID: 662493391759599466}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Exotic_01_SteeringW
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -760,7 +760,7 @@ GameObject:
   - component: {fileID: 6171900316512668379}
   - component: {fileID: 4284745928792065193}
   - component: {fileID: 2036328668171854435}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Attach_Wiper_01_Blade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -841,7 +841,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4039264004823141584}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -875,7 +875,7 @@ GameObject:
   - component: {fileID: 3972137114058272449}
   - component: {fileID: 705251437479997781}
   - component: {fileID: 7597390510642692384}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Exotic_01_Front_Bumper_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -978,7 +978,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5380450279464922480}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Attachments_Group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1024,7 +1024,7 @@ GameObject:
   - component: {fileID: 8654015214698855465}
   - component: {fileID: 5184832029133372056}
   - component: {fileID: 2684367658013030556}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Exotic_01_Rollcage_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1107,10 +1107,12 @@ GameObject:
   - component: {fileID: 1770613814418363781}
   - component: {fileID: 2474549100450346270}
   - component: {fileID: 4962063423067049223}
+  - component: {fileID: 5844009662677931658}
   - component: {fileID: 5357216128450527739}
+  - component: {fileID: 4221546617749091884}
   - component: {fileID: 4358184621738901830}
   - component: {fileID: 503330321942995823}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Car
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1126,7 +1128,7 @@ Transform:
   m_GameObject: {fileID: 1455933390501970947}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.2, y: 0.51, z: -36}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1134,6 +1136,7 @@ Transform:
   - {fileID: 1134594641110394471}
   - {fileID: 4791265453403370562}
   - {fileID: 1884972924128259258}
+  - {fileID: 5121737263240551003}
   - {fileID: 8391293479353090045}
   - {fileID: 8395517166250177387}
   m_Father: {fileID: 0}
@@ -1208,7 +1211,7 @@ MonoBehaviour:
   restLength: 0.25
   springTravel: 0.125
   wheelRadius: 0.38
-  racerSO: {fileID: 11400000, guid: c2379fabde62ea4478bbca5ef309f09f, type: 2}
+  racer: {fileID: 0}
   acceleration: 35
   maxSpeed: 100
   deceleration: 20
@@ -1265,6 +1268,18 @@ MonoBehaviour:
   minSideSkidVelocity: 15
   minPitch: 0.845
   maxPitch: 4
+--- !u!114 &5844009662677931658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455933390501970947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7b8de764ad05f44a897ee8112e8aaf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5357216128450527739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1277,6 +1292,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 386e482b7bf1bb64b85c31d631206ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerNumber: 1
+--- !u!114 &4221546617749091884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455933390501970947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 2cac3b082bfdbdf4c984e6d8ccaf9e0a,
+    type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2fea5c52-9305-4c4a-8a3f-9974bad433e2
+    m_ActionName: Player/Accelerate[/Keyboard/s,/Keyboard/w,/Keyboard/downArrow,/Keyboard/upArrow,/SwitchProControllerHID/buttonSouth,/SwitchProControllerHID/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0d1035fd-9347-48c3-aae6-192d641495a0
+    m_ActionName: Player/Steer[/Keyboard/a,/Keyboard/d,/Keyboard/leftArrow,/Keyboard/rightArrow,/SwitchProControllerHID/leftStick/left,/SwitchProControllerHID/leftStick/right]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1d94760f-80f7-4b6f-b1be-8c200dea9398
+    m_ActionName: Player/Handbrake[/Keyboard/space,/SwitchProControllerHID/leftShoulder,/SwitchProControllerHID/rightShoulder]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ae3e08ef-7ab2-496a-bda9-f3043dd3d016
+    m_ActionName: Player/Join[/Keyboard/j,/SwitchProControllerHID/buttonWest]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 6911427719783892512}
 --- !u!82 &4358184621738901830
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1482,7 +1545,7 @@ GameObject:
   - component: {fileID: 8727612575746024557}
   - component: {fileID: 9001584816100343893}
   - component: {fileID: 3427024686884263131}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Exotic_01_Windscreen_Sticker_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1565,7 +1628,7 @@ GameObject:
   - component: {fileID: 4947809565296275806}
   - component: {fileID: 661617629166170742}
   - component: {fileID: 7358578462154156227}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Attach_Wheel_01_BR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1649,7 +1712,7 @@ GameObject:
   - component: {fileID: 1881532251725661846}
   - component: {fileID: 6280777854226101921}
   - component: {fileID: 898286802099688504}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Exotic_01_Wheel_rl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1732,7 +1795,7 @@ GameObject:
   - component: {fileID: 3135088154098191666}
   - component: {fileID: 2118895646975698065}
   - component: {fileID: 7580172047363840281}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Attach_Pedal_Long_02 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1815,7 +1878,7 @@ GameObject:
   - component: {fileID: 4818271659085687729}
   - component: {fileID: 6074785624720286218}
   - component: {fileID: 4426705464246225621}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Attach_Number_Plate_01 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1898,7 +1961,7 @@ GameObject:
   - component: {fileID: 8124369685220185201}
   - component: {fileID: 3533403966978195582}
   - component: {fileID: 7492631678851866498}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Exotic_01_Undercarriage_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1981,7 +2044,7 @@ GameObject:
   - component: {fileID: 4414053984437923051}
   - component: {fileID: 5136956680405855273}
   - component: {fileID: 7038841120868463326}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Attach_Wheel_01_FL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2065,7 +2128,7 @@ GameObject:
   - component: {fileID: 8085939494918428789}
   - component: {fileID: 1536214331589768821}
   - component: {fileID: 6125921284428605334}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Exotic_01_Roof_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2148,7 +2211,7 @@ GameObject:
   - component: {fileID: 7409300938652728090}
   - component: {fileID: 3135942220506136998}
   - component: {fileID: 6285257025060848608}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Attach_Fire_Extinguisher_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2231,7 +2294,7 @@ GameObject:
   - component: {fileID: 3877042613633640342}
   - component: {fileID: 3224884906154858747}
   - component: {fileID: 3262659937986873860}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Attach_E_Brake_01 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2314,7 +2377,7 @@ GameObject:
   - component: {fileID: 6185069141150359699}
   - component: {fileID: 3680068180292985657}
   - component: {fileID: 6955289526317857154}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Attach_Seat_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2396,7 +2459,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7570519749197765876}
   - component: {fileID: 2482388150414473870}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2533,7 +2596,7 @@ GameObject:
   - component: {fileID: 1612328916566465570}
   - component: {fileID: 2976593918412877088}
   - component: {fileID: 8954783565523444307}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Exotic_01_Door_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2618,7 +2681,7 @@ GameObject:
   - component: {fileID: 7585206581768334707}
   - component: {fileID: 1723419574833083948}
   - component: {fileID: 3307091298089712889}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Attach_Tyre_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2722,7 +2785,7 @@ GameObject:
   - component: {fileID: 4908078392963169515}
   - component: {fileID: 4643095703161737379}
   - component: {fileID: 4529586502544146552}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Attach_Tow_Hook_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2806,7 +2869,7 @@ GameObject:
   - component: {fileID: 3859816141690409221}
   - component: {fileID: 1765011677810662858}
   - component: {fileID: 3738952950798519334}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2900,7 +2963,7 @@ GameObject:
   - component: {fileID: 4067107162019124700}
   - component: {fileID: 181327837452542640}
   - component: {fileID: 3017384989344461179}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Attach_Pedal_Short_03 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2983,7 +3046,7 @@ GameObject:
   - component: {fileID: 8304231464830095861}
   - component: {fileID: 512319612701406663}
   - component: {fileID: 2973954881042558609}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Exotic_01_Spoiler_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3066,7 +3129,7 @@ GameObject:
   - component: {fileID: 4677744780536466436}
   - component: {fileID: 2530825613722943945}
   - component: {fileID: 798694506638493030}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Exotic_01_Glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3149,7 +3212,7 @@ GameObject:
   - component: {fileID: 3492148009803089189}
   - component: {fileID: 7901077995514662520}
   - component: {fileID: 5002472479089532946}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Attach_Speedometer_01 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3233,7 +3296,7 @@ GameObject:
   - component: {fileID: 4561102162863083845}
   - component: {fileID: 7546630997447934740}
   - component: {fileID: 5770596171151837082}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Prop_BoostGauge_Needle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3315,7 +3378,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3819396763697727166}
   - component: {fileID: 3527493046285846181}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3453,7 +3516,7 @@ GameObject:
   - component: {fileID: 3979784686496337246}
   - component: {fileID: 222420423148745459}
   - component: {fileID: 2814311399999706444}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Attach_Tyre_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3557,7 +3620,7 @@ GameObject:
   - component: {fileID: 5040216214704259011}
   - component: {fileID: 2575078861037755329}
   - component: {fileID: 8858099230800302248}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Attach_Pedal_Long_02 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3640,7 +3703,7 @@ GameObject:
   - component: {fileID: 4583743682930459577}
   - component: {fileID: 224484337928674474}
   - component: {fileID: 4139566944551510440}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Attach_Speedometer_01 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3724,7 +3787,7 @@ GameObject:
   - component: {fileID: 2988815991931780055}
   - component: {fileID: 8016313943133378296}
   - component: {fileID: 7366759965901141307}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Exotic_01_Side_Skirts_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3807,7 +3870,7 @@ GameObject:
   - component: {fileID: 5069555211397293708}
   - component: {fileID: 6450995171247061867}
   - component: {fileID: 9139401451512959202}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Attach_Steering_Wheel_08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3888,7 +3951,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5710458638613224936}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3922,7 +3985,7 @@ GameObject:
   - component: {fileID: 315008146234573600}
   - component: {fileID: 7931951478973255654}
   - component: {fileID: 4208125581104014340}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Attach_Tyre_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4026,7 +4089,7 @@ GameObject:
   - component: {fileID: 5164173507412499682}
   - component: {fileID: 1454457819484090197}
   - component: {fileID: 6249644553725873573}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Exotic_01_Door_L_Glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4107,7 +4170,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3533738979255626734}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CarParts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4170,7 +4233,7 @@ GameObject:
   - component: {fileID: 5156614428669236829}
   - component: {fileID: 5890067437268104323}
   - component: {fileID: 3246633901314653846}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Exotic_01_Wheel_fr
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4253,7 +4316,7 @@ GameObject:
   - component: {fileID: 2613386722757835259}
   - component: {fileID: 6017047161349593154}
   - component: {fileID: 8767635046191970160}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Exotic_01_Engine_Cover_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4336,7 +4399,7 @@ GameObject:
   - component: {fileID: 77724466989546518}
   - component: {fileID: 3410693806873773869}
   - component: {fileID: 9002095955083880724}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Attach_Speedometer_Needle_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4417,7 +4480,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8395517166250177387}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4455,7 +4518,7 @@ GameObject:
   - component: {fileID: 5528035625658316024}
   - component: {fileID: 4869529557572829217}
   - component: {fileID: 6781063788502922265}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Attach_Tyre_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4559,7 +4622,7 @@ GameObject:
   - component: {fileID: 7414319646187980603}
   - component: {fileID: 2833983976269598480}
   - component: {fileID: 951400149122008615}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Exotic_01_Rear_Bumper_02_Exhaust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4640,7 +4703,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 446758034408316003}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4671,7 +4734,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4791265453403370562}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Raypoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4706,7 +4769,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2607267717287943076}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4739,7 +4802,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6103337583977742191}
   - component: {fileID: 4658928306059420404}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4876,7 +4939,7 @@ GameObject:
   - component: {fileID: 3029031277892870463}
   - component: {fileID: 5810791707812719289}
   - component: {fileID: 1702402263726075332}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Exotic_01_Wheel_fl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4959,7 +5022,7 @@ GameObject:
   - component: {fileID: 8643827532279395117}
   - component: {fileID: 658944121912288626}
   - component: {fileID: 6204263444362912014}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Exotic_01_Bonnet_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5042,7 +5105,7 @@ GameObject:
   - component: {fileID: 4581239456595525060}
   - component: {fileID: 8001402801229481983}
   - component: {fileID: 8720018027865450443}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Attach_Seat_03 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5123,7 +5186,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6137089321011063100}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5156,7 +5219,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8391293479353090045}
   - component: {fileID: 7869321080411517142}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Virtual Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5171,8 +5234,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6339666095890242254}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.21169859, y: 0.0031107385, z: -0.0006738143, w: 0.97732985}
-  m_LocalPosition: {x: -0.03501129, y: 2.5, z: -5.4998894}
+  m_LocalRotation: {x: 0.21169324, y: -0.0076437667, z: 0.0016557104, w: 0.9773049}
+  m_LocalPosition: {x: 0.08602905, y: 2.5, z: -5.4993267}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5229,7 +5292,7 @@ GameObject:
   - component: {fileID: 3458856647133320267}
   - component: {fileID: 4598774397640371657}
   - component: {fileID: 3976529733173358875}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Attach_Mirror_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5312,7 +5375,7 @@ GameObject:
   - component: {fileID: 7653421967466588164}
   - component: {fileID: 8079699827234097950}
   - component: {fileID: 1704643092329006437}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Exotic_01_Wheel_rr
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5393,7 +5456,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1884972924128259258}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AccelerationPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5426,7 +5489,7 @@ GameObject:
   - component: {fileID: 3511053410184437788}
   - component: {fileID: 5013961270094019181}
   - component: {fileID: 4278899756300670104}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Attach_Wiper_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5510,7 +5573,7 @@ GameObject:
   - component: {fileID: 2240986818664298504}
   - component: {fileID: 858892086825174838}
   - component: {fileID: 3818193676695162180}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Attach_Mirror_01 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5593,7 +5656,7 @@ GameObject:
   - component: {fileID: 8424282923932233903}
   - component: {fileID: 5562951315437814821}
   - component: {fileID: 6856322016355062799}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Attach_Handbrake_Slot_01 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5676,7 +5739,7 @@ GameObject:
   - component: {fileID: 8775071539254566411}
   - component: {fileID: 4687586937854825719}
   - component: {fileID: 3428795913447820424}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Exotic_01_Fenders_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5757,7 +5820,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7262914351273715043}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5791,7 +5854,7 @@ GameObject:
   - component: {fileID: 7803234096760025670}
   - component: {fileID: 8603358343855607614}
   - component: {fileID: 8204217195841120941}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Attach_Wheel_01_BL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5876,7 +5939,7 @@ GameObject:
   - component: {fileID: 1999159913284434478}
   - component: {fileID: 1755336834878876095}
   - component: {fileID: 8124959219416000224}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CarBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5969,6 +6032,178 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &8206073269392780034
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5121737263240551003}
+  - component: {fileID: 6911427719783892512}
+  - component: {fileID: 8643938202886775832}
+  - component: {fileID: 8506918036318510278}
+  - component: {fileID: 3780451563058159704}
+  m_Layer: 0
+  m_Name: Camera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5121737263240551003
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8206073269392780034}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.21169327, y: -0.0076437676, z: 0.0016557106, w: 0.9773049}
+  m_LocalPosition: {x: 0.08602905, y: 2.5, z: -5.4993286}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1770613814418363781}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &6911427719783892512
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8206073269392780034}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: -1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 247
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!81 &8643938202886775832
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8206073269392780034}
+  m_Enabled: 1
+--- !u!114 &8506918036318510278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8206073269392780034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 1
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
+--- !u!114 &3780451563058159704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8206073269392780034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowDebugText: 0
+  m_ShowCameraFrustum: 1
+  m_IgnoreTimeScale: 0
+  m_WorldUpOverride: {fileID: 0}
+  m_UpdateMethod: 2
+  m_BlendUpdateMethod: 1
+  m_DefaultBlend:
+    m_Style: 1
+    m_Time: 2
+    m_CustomCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  m_CustomBlends: {fileID: 0}
+  m_CameraCutEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_CameraActivatedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8263308003297342670
 GameObject:
   m_ObjectHideFlags: 0
@@ -5980,7 +6215,7 @@ GameObject:
   - component: {fileID: 911249806386739607}
   - component: {fileID: 7508414024012595018}
   - component: {fileID: 2346521601352503026}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Prop_BoostGauge_02 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6064,7 +6299,7 @@ GameObject:
   - component: {fileID: 5831206263204519316}
   - component: {fileID: 3947345375248357636}
   - component: {fileID: 5040831020194086413}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Attach_Wiper_01_Blade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6145,7 +6380,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5660550587422646094}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wheels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6181,7 +6416,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6168942706696473712}
   - component: {fileID: 3669474510184073032}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6318,7 +6553,7 @@ GameObject:
   - component: {fileID: 873891699510721309}
   - component: {fileID: 6190797160938208761}
   - component: {fileID: 4602936921530505484}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Exotic_01_Engine_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6401,7 +6636,7 @@ GameObject:
   - component: {fileID: 7459035507104686484}
   - component: {fileID: 5923278369739376411}
   - component: {fileID: 2838081945253408135}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Attach_Speedometer_Needle_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6482,7 +6717,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4506025815663372909}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6516,7 +6751,7 @@ GameObject:
   - component: {fileID: 1614752640101692761}
   - component: {fileID: 2441995584508683256}
   - component: {fileID: 7892870292351857443}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Exotic_01_Rear_Bumper_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6623,7 +6858,7 @@ GameObject:
   - component: {fileID: 4339757594770061888}
   - component: {fileID: 7695899962190662372}
   - component: {fileID: 4814290821686573405}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Attach_Speedometer_Scifi_01 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6706,7 +6941,7 @@ GameObject:
   - component: {fileID: 5140316443653496475}
   - component: {fileID: 2883092351761722651}
   - component: {fileID: 1032012779153363312}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Attach_Number_Plate_01 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6789,7 +7024,7 @@ GameObject:
   - component: {fileID: 5013823884205014930}
   - component: {fileID: 697237226713853466}
   - component: {fileID: 2770696909306909019}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Veh_Exotic_01_Seats_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
