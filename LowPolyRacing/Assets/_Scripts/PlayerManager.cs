@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Linq;
+using UnityEngine.InputSystem.Utilities;
 
 public class PlayerManager : MonoBehaviour {
 
@@ -78,6 +79,8 @@ public class PlayerManager : MonoBehaviour {
             return;
         }
 
+        player.onControlsChanged += RemovePlayer;
+
         players[playerIndex] = player;
         TrackSelectionUIHandler.Instance.AddPlayerDisplay(playerIndex);
     }
@@ -87,11 +90,12 @@ public class PlayerManager : MonoBehaviour {
     }
 
     public void RemovePlayer(PlayerInput player) {
-
         int playerIndex = players.First(p => p == player).playerIndex;
         Destroy(players[playerIndex].gameObject);
         TrackSelectionUIHandler.Instance.RemovePlayerDisplay(playerIndex);
         players[playerIndex] = null;
+
+        player.onControlsChanged -= RemovePlayer;
     }
 
     private int GetPlayerCount() {
