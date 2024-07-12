@@ -96,6 +96,10 @@ public class CarController : MonoBehaviour {
         this.isActive = isActive;
     }
 
+    public bool IsActive() {
+        return isActive;
+    }
+
     #region Movement
 
     private void Movement() {

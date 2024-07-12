@@ -3,8 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Linq;
 
 public class PlayerManager : MonoBehaviour {
+
+    public static PlayerManager Instance;
 
     private List<PlayerInput> players = new List<PlayerInput>();
     [SerializeField] private List<Transform> spawnpoints;
@@ -13,6 +16,12 @@ public class PlayerManager : MonoBehaviour {
     private PlayerInputManager playerInputManager;
 
     private void Awake() {
+        if(Instance != null && Instance != null) {
+            Destroy(this);
+            return;
+        }
+        Instance = this;
+
         playerInputManager = GetComponent<PlayerInputManager>();
     }
 
@@ -48,6 +57,11 @@ public class PlayerManager : MonoBehaviour {
         }
 
         RaceController.Instance.AddRacer(player.GetComponent<CarController>());
+    }
+
+    public List<CarController> GetCarControllerFromAllPlayers() {
+        List<CarController> controllers = players.Select(p => p.GetComponent<CarController>()).ToList();
+        return controllers;
     }
 
 }

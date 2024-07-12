@@ -141,10 +141,11 @@ public class RaceController : MonoBehaviour {
                         car.SetIsActive(false);
                         racingCars--;
 
-                        if(racingCars <= 0) {
+                        List<CarController> playerControllers = PlayerManager.Instance.GetCarControllerFromAllPlayers();
+                        if(playerControllers.All(c => !c.IsActive()) || racingCars <= 0) {
                             raceFinished = true;
                             DisplayFinishedRace();
-                        }
+                        }                        
                     } else {
                         int laps = racer.GetLaps();
                         laps++;
