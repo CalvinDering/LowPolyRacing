@@ -1292,6 +1292,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 386e482b7bf1bb64b85c31d631206ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pause:
+    m_Name: Pause
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: c722eb9a-b5b9-4d94-ba6d-e3e47861928c
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  exit:
+    m_Name: Exit
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: de337671-a011-46df-882e-14195230a8e8
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   playerNumber: 1
 --- !u!114 &4221546617749091884
 MonoBehaviour:

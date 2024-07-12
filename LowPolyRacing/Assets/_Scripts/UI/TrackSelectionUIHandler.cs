@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class TrackSelectionUIHandler : MonoBehaviour {
@@ -11,21 +12,39 @@ public class TrackSelectionUIHandler : MonoBehaviour {
     [SerializeField] private Image selectedTrackImage;
     [SerializeField] private TextMeshProUGUI selectedTrackLapsText;
     [SerializeField] private TextMeshProUGUI aiRacerCountText;
+    [SerializeField] private Transform[] playerSlots;
+    [SerializeField] private string joinMessage;
 
-    public int selectedTrackId = 0;
-    public int selectedTrackLaps = 3;
-    public int aiRacerCount = 0;
+    private int selectedTrackId = 0;
+    private int selectedTrackLaps = 3;
+    private int aiRacerCount = 0;
 
     public static TrackSelectionUIHandler Instance;
 
     private void Awake() {
-        if(Instance != null && Instance != null) {
-            Destroy(this);
+        if(Instance != this && Instance != null) {
+            Destroy(gameObject);
             return;
         }
         Instance = this;
+        //DontDestroyOnLoad(gameObject);
 
+        SetupPlayerSlots();
         UpdateTrackDisplay();
+    }
+
+    private void SetupPlayerSlots() {
+        PlayerInput[] players = PlayerManager.Instance.GetPlayers();
+        for(int i = 0; i < playerSlots.Length; i++) {
+            PlayerSlot playerSlot = playerSlots[i].GetComponent<PlayerSlot>();
+            if(players[i] != null) {
+                int increasedPlayerId = i + 1;
+                playerSlot.SetPlayerName("Player " + increasedPlayerId, true);
+            } else {
+                playerSlot.SetPlayerName(joinMessage);
+                playerSlot.SetCarDisplay(false);
+            }
+        }
     }
 
     public void NextTrack() {
@@ -103,8 +122,21 @@ public class TrackSelectionUIHandler : MonoBehaviour {
         aiRacerCountText.text = "COMS: " + aiRacerCount;
     }
 
+    public void AddPlayerDisplay(int playerId) {
+        PlayerSlot playerSlot = playerSlots[playerId].GetComponent<PlayerSlot>();
+        int increasedPlayerId = playerId + 1;
+        playerSlot.SetPlayerName("Player " + increasedPlayerId, true);
+    }
+
+    public void RemovePlayerDisplay(int playerId) {
+        PlayerSlot playerSlot = playerSlots[playerId].GetComponent<PlayerSlot>();
+        playerSlot.SetPlayerName(joinMessage);
+    }
+
     public void StartGame() {
-        SceneHandler.Instance.LoadGameScene();
+        PlayerManager.Instance.selectedTrackLaps = selectedTrackLaps;
+        PlayerManager.Instance.aiRacerCount = aiRacerCount;
+        SceneHandler.Instance.LoadTrackScene(selectedTrackId);
     }
 
     public void GoToMainMenu() {

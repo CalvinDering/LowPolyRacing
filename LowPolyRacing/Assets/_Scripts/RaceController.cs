@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class RaceController : MonoBehaviour {
 
     [Header("References")]
     [SerializeField] private List<GameObject> checkpoints;
     [SerializeField] private List<Racer> racers = new List<Racer>();
+    [SerializeField] private List<Transform> spawnpoints;
     [SerializeField] private TextMeshProUGUI countdownTimerText;
     [SerializeField] private TextMeshProUGUI lapCounterText;
     [SerializeField] private TextMeshProUGUI checkpointCounterText;
@@ -31,19 +33,20 @@ public class RaceController : MonoBehaviour {
     public static RaceController Instance;
 
     private void Awake() {
-        if(Instance != null && Instance != null) {
-            Destroy(this);
+        if(Instance != this && Instance != null) {
+            Destroy(gameObject);
             return;
         }
         Instance = this;
 
-        maxLaps = TrackSelectionUIHandler.Instance.selectedTrackLaps;
+        maxLaps = PlayerManager.Instance.selectedTrackLaps;
     }
 
     private void Start() {
         raceFinished = false;
         raceFinishedText.enabled = false;
         SetupCheckpoints();
+        SetupSpawnpoints();
         SetupPlayers();
         onceSecondTimer = Time.time;
     }
@@ -106,18 +109,27 @@ public class RaceController : MonoBehaviour {
         }
     }
 
+    private void SetupSpawnpoints() {
+        PlayerManager.Instance.SetupSpawnpoints(spawnpoints);
+    }
+
     private void SetupPlayers() {
-        CarController[] players = FindObjectsOfType<CarController>();
+        /*CarController[] players = FindObjectsOfType<CarController>();
         for(int i = 0; i < players.Length; i++) {
 
             AddRacer(players[i]);
-        }
+        }*/
+
+        PlayerManager.Instance.SetupPlayerCars();
 
         setupFinished = true;
     }
 
     public void AddRacer(CarController controller) {
         Racer racer = controller.GetComponent<Racer>();
+
+        PlayerManager.Instance.SetPlayerComponents(controller.gameObject.GetComponent<PlayerInput>(), true);
+
         racer.SetId(racers.Count);
         racer.SetLaps(1);
         racer.SetCurrentCheckpoint(0);

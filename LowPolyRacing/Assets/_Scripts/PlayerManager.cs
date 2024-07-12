@@ -9,43 +9,119 @@ public class PlayerManager : MonoBehaviour {
 
     public static PlayerManager Instance;
 
-    private List<PlayerInput> players = new List<PlayerInput>();
-    [SerializeField] private List<Transform> spawnpoints;
+    private PlayerInput[] players = new PlayerInput[4];
+    private List<Transform> spawnpoints;
     [SerializeField] private List<LayerMask> playerLayers;
+
+    public int selectedTrackLaps = 3;
+    public int aiRacerCount = 0;
 
     private PlayerInputManager playerInputManager;
 
     private void Awake() {
-        if(Instance != null && Instance != null) {
-            Destroy(this);
+        if(Instance != this && Instance != null) {
+            Destroy(gameObject);
             return;
         }
         Instance = this;
+        DontDestroyOnLoad(gameObject);
 
-        playerInputManager = GetComponent<PlayerInputManager>();
+        for(int i = 0; i < players.Length; i++) {
+            players[i] = null;
+        }
     }
 
     private void OnEnable() {
+        playerInputManager = GetComponent<PlayerInputManager>();
         playerInputManager.onPlayerJoined += AddPlayer;
+        playerInputManager.onPlayerLeft += RemovePlayer;
     }
 
     private void OnDisable() {
+        playerInputManager = GetComponent<PlayerInputManager>();
         playerInputManager.onPlayerJoined -= AddPlayer;
+        playerInputManager.onPlayerLeft -= RemovePlayer;
+    }
+
+    public void SetAllPlayerComponents(bool isActive) {
+        foreach(PlayerInput player in players) {
+            if(player != null) {
+                SetPlayerComponents(player, isActive);
+            }
+        }
+    }
+
+    public void SetPlayerComponents(PlayerInput player, bool isActive) {
+        player.gameObject.GetComponent<CarController>().enabled = isActive;
+        player.gameObject.GetComponent<Rigidbody>().isKinematic = !isActive;
+        player.gameObject.GetComponent<CarInputHandler>().enabled = isActive;
+        AudioSource[] audioSources = player.gameObject.GetComponents<AudioSource>();
+        foreach(AudioSource audio in audioSources) {
+            audio.enabled = isActive;
+        }
     }
 
     public void AddPlayer(PlayerInput player) {
-        players.Add(player);
 
-        player.transform.GetComponent<Rigidbody>().position = spawnpoints[players.Count - 1].position;
+        SetPlayerComponents(player, false);
 
-        int layerToAdd = (int) Mathf.Log(playerLayers[players.Count - 1].value, 2);
+        int playerIndex = -1;
+        for(int i = 0; i < players.Length; i++) {
+            if(players[i] == null) {
+                playerIndex = i;
+                break;
+            }
+        }
+
+        if(playerIndex == -1) {
+            Debug.LogError("Could not add player!");
+            return;
+        }
+
+        players[playerIndex] = player;
+        TrackSelectionUIHandler.Instance.AddPlayerDisplay(playerIndex);
+    }
+
+    public PlayerInput[] GetPlayers() {
+        return players;
+    }
+
+    public void RemovePlayer(PlayerInput player) {
+
+        int playerIndex = players.First(p => p == player).playerIndex;
+        Destroy(players[playerIndex].gameObject);
+        TrackSelectionUIHandler.Instance.RemovePlayerDisplay(playerIndex);
+        players[playerIndex] = null;
+    }
+
+    private int GetPlayerCount() {
+        int playerCount = players.Count(p => p != null);
+        return playerCount;
+    }
+
+    public void SetupPlayerCars() {
+        foreach(PlayerInput player in players) {
+            if(player != null) {
+                AddPlayerCar(player);
+            }
+        }
+    }
+
+    public void SetupSpawnpoints(List<Transform> spawnpoints) {
+        this.spawnpoints = spawnpoints;
+    }
+
+    public void AddPlayerCar(PlayerInput player) {
+        player.transform.GetComponent<Rigidbody>().position = spawnpoints[players.Length - 1].position;
+
+        int layerToAdd = (int) Mathf.Log(playerLayers[players.Length - 1].value, 2);
 
         player.GetComponentInChildren<CinemachineVirtualCamera>().gameObject.layer = layerToAdd;
         player.GetComponentInChildren<Camera>().cullingMask |= 1 << layerToAdd;
 
-        int playerCount = players.Count;
+        int playerCount = GetPlayerCount();
 
-        for(int i = 0; i <playerCount; i++) {
+        for(int i = 0; i < playerCount; i++) {
 
             float viewportX = (0.25f * Mathf.Pow(i, 2) - 0.25f * i) % 1;
             float viewportY = 0.5f * Mathf.Pow(i, 2) % 2;

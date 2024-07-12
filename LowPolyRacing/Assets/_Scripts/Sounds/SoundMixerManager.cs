@@ -11,12 +11,12 @@ public class SoundMixerManager : MonoBehaviour {
 
     private void Awake() {
         if(Instance != this && Instance != null) {
-            Destroy(this);
+            Destroy(gameObject);
             return;
         }
 
         Instance = this;
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(gameObject);
     }
 
     public void SetMasterVolume(float level) {

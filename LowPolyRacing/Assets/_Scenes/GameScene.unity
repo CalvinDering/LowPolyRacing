@@ -2110,6 +2110,11 @@ MonoBehaviour:
   - {fileID: 571153908}
   - {fileID: 555589756}
   racers: []
+  spawnpoints:
+  - {fileID: 988384548}
+  - {fileID: 1613742640}
+  - {fileID: 602875738}
+  - {fileID: 763730160}
   countdownTimerText: {fileID: 287583156}
   lapCounterText: {fileID: 57459192}
   checkpointCounterText: {fileID: 875526402}
@@ -10657,111 +10662,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7740aeebb0c9c27409ce91a797e536cb, type: 3}
---- !u!1 &2056311149
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2056311151}
-  - component: {fileID: 2056311150}
-  - component: {fileID: 2056311152}
-  m_Layer: 0
-  m_Name: InputHandler
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2056311150
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2056311149}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_NotificationBehavior: 3
-  m_MaxPlayerCount: 4
-  m_AllowJoining: 1
-  m_JoinBehavior: 1
-  m_PlayerJoinedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_PlayerLeftEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_JoinAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Join
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 052d3959-bf36-47a4-8616-7f2c7d48e157
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: -4418915592323383919, guid: 2cac3b082bfdbdf4c984e6d8ccaf9e0a,
-      type: 3}
-  m_PlayerPrefab: {fileID: 1455933390501970947, guid: c2ff3a224f89068489396664fdc0fa30,
-    type: 3}
-  m_SplitScreen: 0
-  m_MaintainAspectRatioInSplitScreen: 0
-  m_FixedNumberOfSplitScreens: -1
-  m_SplitScreenRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
---- !u!4 &2056311151
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2056311149}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2056311152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2056311149}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32de90521fd30f74a8132a64b5c89842, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnpoints:
-  - {fileID: 988384548}
-  - {fileID: 1613742640}
-  - {fileID: 602875738}
-  - {fileID: 763730160}
-  playerLayers:
-  - serializedVersion: 2
-    m_Bits: 1024
-  - serializedVersion: 2
-    m_Bits: 2048
-  - serializedVersion: 2
-    m_Bits: 4096
-  - serializedVersion: 2
-    m_Bits: 8192
 --- !u!1 &2119460103
 GameObject:
   m_ObjectHideFlags: 0
@@ -11332,7 +11232,6 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 391922050}
-  - {fileID: 2056311151}
   - {fileID: 474692807}
   - {fileID: 366984362}
   - {fileID: 2129142673353624363}

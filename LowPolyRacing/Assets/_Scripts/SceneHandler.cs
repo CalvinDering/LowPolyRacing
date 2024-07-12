@@ -13,16 +13,24 @@ public class SceneHandler : MonoBehaviour {
 
     private void Awake() {
         if(Instance != this && Instance != null) {
-            Destroy(this);
+            Destroy(gameObject);
             return;
         }
 
         Instance = this;
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start() {
         MusicManager.Instance.PlayMenuMusic();
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        if(scene.buildIndex == TrackSectionSceneIndex) {
+            PlayerManager.Instance.SetAllPlayerComponents(false);
+        }
     }
 
     public void LoadMenuScene() {
@@ -32,10 +40,6 @@ public class SceneHandler : MonoBehaviour {
 
     public void LoadTrackSelectionScene() {
         SceneManager.LoadScene(TrackSectionSceneIndex);
-    }
-
-    public void LoadGameScene() {
-        LoadTrackScene(TrackSelectionUIHandler.Instance.selectedTrackId);
     }
 
     public void LoadTrackScene(int trackId) {

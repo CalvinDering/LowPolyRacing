@@ -11,8 +11,8 @@ public class PauseUIHandler : MonoBehaviour {
     private bool isPaused = false;
 
     private void Awake() {
-        if(Instance != null && Instance != null) {
-            Destroy(this);
+        if(Instance != this && Instance != null) {
+            Destroy(gameObject);
             return;
         }
         Instance = this;
@@ -37,7 +37,7 @@ public class PauseUIHandler : MonoBehaviour {
 
     public void GoToMainMenu() {
         Time.timeScale = 1f;
-        SceneHandler.Instance.LoadMenuScene();
+        SceneHandler.Instance.LoadTrackSelectionScene();
     }
 
 }

@@ -66,6 +66,7 @@ public class CarController : MonoBehaviour {
         carRB = GetComponent<Rigidbody>();
 
         if(gameObject.tag == "Player") {
+            DontDestroyOnLoad(gameObject);
 
         } else if(gameObject.tag == "AI") {
         
@@ -87,7 +88,7 @@ public class CarController : MonoBehaviour {
 
         if(inputHandler != null) {
             if(RaceController.Instance.IsRaceFinished() && inputHandler.exit.triggered) {
-                SceneHandler.Instance.LoadMenuScene();
+                SceneHandler.Instance.LoadTrackSelectionScene();
             }
         }        
     }

@@ -10,12 +10,12 @@ public class SoundFXManager : MonoBehaviour {
 
     private void Awake() {
         if(Instance != this && Instance != null) {
-            Destroy(this);
+            Destroy(gameObject);
             return;
         }
 
         Instance = this;
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(gameObject);
     }
 
     public void PlaySoundFXClip(AudioClip audioClip, Transform spawnTransform, float volume, float pitch = 1f) {
