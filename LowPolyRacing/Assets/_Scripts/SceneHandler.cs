@@ -8,6 +8,7 @@ public class SceneHandler : MonoBehaviour {
     public static SceneHandler Instance;
 
     [SerializeField] private int MenuSceneIndex;
+    [SerializeField] private int TrackSectionSceneIndex;
     [SerializeField] private int GameSceneIndex;
 
     private void Awake() {
@@ -27,6 +28,10 @@ public class SceneHandler : MonoBehaviour {
     public void LoadMenuScene() {
         SceneManager.LoadScene(MenuSceneIndex);
         MusicManager.Instance.PlayMenuMusic();
+    }
+
+    public void LoadTrackSelectionScene() {
+        SceneManager.LoadScene(TrackSectionSceneIndex);
     }
 
     public void LoadGameScene() {

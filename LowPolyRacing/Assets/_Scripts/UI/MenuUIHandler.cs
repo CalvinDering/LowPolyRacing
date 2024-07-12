@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MenuUIHandler : MonoBehaviour {
 
-    public void StartGame() {
-        SceneHandler.Instance.LoadGameScene();
+    public void ShowTrackSelection() {
+        SceneHandler.Instance.LoadTrackSelectionScene();
     }
     
     public void ShowSettings() {

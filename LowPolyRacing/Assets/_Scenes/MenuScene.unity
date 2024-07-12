@@ -197,7 +197,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MenuSceneIndex: 0
-  GameSceneIndex: 1
+  TrackSectionSceneIndex: 1
+  GameSceneIndex: 2
 --- !u!4 &193634969
 Transform:
   m_ObjectHideFlags: 0
@@ -1038,7 +1039,7 @@ GameObject:
   - component: {fileID: 1497641878}
   - component: {fileID: 1497641877}
   m_Layer: 5
-  m_Name: Settings
+  m_Name: SettingsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1110,7 +1111,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1544168360}
         m_TargetAssemblyTypeName: MenuUIHandler, Assembly-CSharp
-        m_MethodName: Settings
+        m_MethodName: ShowSettings
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1650,7 +1651,7 @@ GameObject:
   - component: {fileID: 2089213308}
   - component: {fileID: 2089213307}
   m_Layer: 5
-  m_Name: ExitGame
+  m_Name: ExitGameButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1783,7 +1784,7 @@ GameObject:
   - component: {fileID: 2103520424}
   - component: {fileID: 2103520423}
   m_Layer: 5
-  m_Name: StartGame
+  m_Name: TrackSelectionButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1855,7 +1856,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1544168360}
         m_TargetAssemblyTypeName: MenuUIHandler, Assembly-CSharp
-        m_MethodName: StartGame
+        m_MethodName: ShowTrackSelection
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
