@@ -60,6 +60,7 @@ public class PlayerManager : MonoBehaviour {
         foreach(AudioSource audio in audioSources) {
             audio.enabled = isActive;
         }
+        player.gameObject.GetComponentInChildren<AudioListener>().enabled = isActive;
         player.transform.Find("Canvas").gameObject.SetActive(isActive);
     }
 
