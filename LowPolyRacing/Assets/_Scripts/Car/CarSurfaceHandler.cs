@@ -44,4 +44,8 @@ public class CarSurfaceHandler : MonoBehaviour {
         lastSampledSurfacePosition = transform.position;
     }
 
+    public Surface.SurfaceType GetCurrentSurface() {
+        return currentSurface;
+    }
+
 }

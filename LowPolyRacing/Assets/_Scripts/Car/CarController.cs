@@ -15,9 +15,11 @@ public class CarController : MonoBehaviour {
     [SerializeField] private PlayerUIStats playerUIStats;
 
     private CarInputHandler inputHandler = null;
+    private CarSurfaceHandler surfaceHandler;
 
     [SerializeField] private TrailRenderer[] skidMarks = new TrailRenderer[2];
     [SerializeField] private ParticleSystem[] skidSmokes = new ParticleSystem[2];
+    [SerializeField] private ParticleSystem.EmissionModule skidSmokesEmission;
     [SerializeField] private AudioSource engineSound;
     [SerializeField] private AudioSource skidSound;
 
@@ -66,6 +68,7 @@ public class CarController : MonoBehaviour {
     private void Awake() {
         carRB = GetComponent<Rigidbody>();
         playerUIStats = GetComponent<PlayerUIStats>();
+        surfaceHandler = GetComponent<CarSurfaceHandler>();
 
         if(gameObject.tag == "Player") {
             DontDestroyOnLoad(gameObject);
@@ -196,6 +199,10 @@ public class CarController : MonoBehaviour {
         carVelocityRatio = currectCarLocalVelocity.z / maxSpeed;
     }
 
+    public Surface.SurfaceType GetSurface() {
+        return surfaceHandler.GetCurrentSurface();
+    }
+
     #endregion
 
     #region Suspension
@@ -280,13 +287,39 @@ public class CarController : MonoBehaviour {
     }
     
     private void ToggleSkidSmokes(bool toggle) {
-        foreach(ParticleSystem smoke in skidSmokes) {
+        foreach(ParticleSystem smokeSystem in skidSmokes) {
+            ParticleSystem.MainModule smoke = smokeSystem.main;
+            ParticleSystem.EmissionModule smokeEmission = smokeSystem.emission;
+
             if(toggle) {
-                smoke.Play();
+                smokeEmission.rateOverTime = 100;
+                Color startColor = new Color(0.83f, 0.83f, 0.83f);
+                switch(surfaceHandler.GetCurrentSurface()) {
+                    case Surface.SurfaceType.Road:
+                        return;
+                    case Surface.SurfaceType.Grass:
+                        startColor = new Color(0.15f, 0.4f, 0.2f);
+                        break;
+                    case Surface.SurfaceType.Sand:
+                        startColor = new Color(0.64f, 0.42f, 0.24f);
+                        break;
+                    case Surface.SurfaceType.Water:
+                        startColor = new Color(0.25f, 0.25f, 0.8f);
+                        break;
+                    case Surface.SurfaceType.Oil:
+                        smokeEmission.rateOverTime = 200;
+                        startColor = new Color(0.2f, 0.2f, 0.2f);
+                        break;
+                }
+                smoke.startColor = startColor;
+                smokeSystem.Play();
             } else {
-                smoke.Stop();
+                smokeEmission.rateOverTime = 0;
+                smokeSystem.Stop();
             }
         }
+
+        
     }
 
     private void ToggleSkidSounds(bool toggle) {

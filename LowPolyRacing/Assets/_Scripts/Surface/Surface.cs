@@ -5,7 +5,7 @@ using UnityEngine;
 public class Surface : MonoBehaviour {
 
     public enum SurfaceType {
-        Road, Sand, Grass, Water, Oil
+        Road, Grass, Sand, Water, Oil
     };
 
     [Header("Surface")]
