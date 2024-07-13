@@ -167,6 +167,8 @@ public class PlayerManager : MonoBehaviour {
         forthVirtualCamera = forthSplitscreenCamera.GetComponentInChildren<CinemachineVirtualCamera>();
         int layerToAdd = (int) Mathf.Log(playerLayers[3].value, 2);
         forthSplitscreenCamera.GetComponentInChildren<CinemachineVirtualCamera>().gameObject.layer = layerToAdd;
+        Camera forthCamera = forthSplitscreenCamera.GetComponentInChildren<Camera>();
+        forthCamera.cullingMask |= 1 << layerToAdd;
         SetForthCameraLayerAtPlayer(0);
     }
 
@@ -214,15 +216,15 @@ public class PlayerManager : MonoBehaviour {
         GameObject playerObject = players[playerIndex].gameObject;
         forthVirtualCamera.Follow = playerObject.transform;
         forthVirtualCamera.LookAt = players[playerIndex].transform.Find("CarBody");
-        Camera forthCamera = forthSplitscreenCamera.GetComponentInChildren<Camera>();
-
+        /*Camera forthCamera = forthSplitscreenCamera.GetComponentInChildren<Camera>();
+        
         for(int i = 0; i < 4; i++) {
             int layerToRemove = (int) Mathf.Log(playerLayers[i].value, 2);
             forthCamera.cullingMask &= ~(1 << layerToRemove);
         }
 
         int layerToAdd = (int) Mathf.Log(playerLayers[playerIndex].value, 2);
-        forthCamera.cullingMask |= 1 << layerToAdd;
+        forthCamera.cullingMask |= 1 << layerToAdd;*/
     }
 
     public void AddAICar(CarController controller, int spawnIndex) {
