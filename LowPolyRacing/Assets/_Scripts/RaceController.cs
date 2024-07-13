@@ -128,6 +128,7 @@ public class RaceController : MonoBehaviour {
         racerPositions.Add(racer);
 
         DisplayRaceStats(racer);
+        RecalculatePositions(racer);
         racingCars++;
 
         controller.SetIsActive(false);
@@ -168,8 +169,19 @@ public class RaceController : MonoBehaviour {
     }
 
     private void RecalculatePositions(Racer racer) {
-        racerPositions = racerPositions.OrderByDescending(r => r.GetLaps()).ThenByDescending(r => r.GetCurrentCheckpoint()).ThenBy(r => r.GetCheckpointTime()).ToList();
+        racerPositions = racerPositions.OrderByDescending(r => r.GetLaps()).ThenByDescending(r => r.GetCurrentCheckpoint()).ThenBy(r => r.GetCheckpointTime()).ThenBy(r => DistanceToNextCheckpoint(r)).ToList();
         racer.SetPosition(racerPositions.IndexOf(racer) + 1);
+        DisplayAllPositions();
+    }
+
+    private float DistanceToNextCheckpoint(Racer racer) {
+        int nextCheckpoint = racer.GetCurrentCheckpoint() + 1;
+        if(nextCheckpoint >= checkpoints.Count) {
+            nextCheckpoint = 0;
+        }
+
+        float distance = Vector3.Distance(racer.transform.position, checkpoints[nextCheckpoint].transform.position);
+        return distance;
     }
 
     private void DisplayRaceStats(Racer racer) {
@@ -185,6 +197,10 @@ public class RaceController : MonoBehaviour {
         } else {
             racerStats.SetCheckpointTimeText(racer.GetCheckpointTime());
         }
+    }
+
+    private void DisplayAllPositions() {
+        racers.ForEach(r => r.GetController().GetPlayerUIStats().SetPosition(r.GetPosition()));
     }
 
     private void DisplayFinishedRace() {

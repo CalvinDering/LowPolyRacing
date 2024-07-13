@@ -11,6 +11,7 @@ public class PlayerUIStats : MonoBehaviour {
     [SerializeField] public TextMeshProUGUI lapCounterText;
     [SerializeField] public TextMeshProUGUI checkpointCounterText;
     [SerializeField] public TextMeshProUGUI checkpointTimeText;
+    [SerializeField] public TextMeshProUGUI positionText;
 
     [SerializeField] private float raceCountdownFadeOutTimer = 0.5f;
     [SerializeField] private float checkpointTimeFading = 2f;
@@ -43,6 +44,10 @@ public class PlayerUIStats : MonoBehaviour {
         int milliseconds = (int) ((checkpointTime % 1f) * 1000);
 
         SetCheckpointTimeText(string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, milliseconds), fadeOut);
+    }
+
+    public void SetPosition(int position) {
+        positionText.text = position + ".";
     }
 
     private IEnumerator FadeTextToZeroAlpha(float timer, TextMeshProUGUI text) {
