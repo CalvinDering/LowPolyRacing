@@ -2994,6 +2994,9 @@ MonoBehaviour:
     m_Bits: 8192
   aiCarPrefab: {fileID: 6498965619865622158, guid: 7740aeebb0c9c27409ce91a797e536cb,
     type: 3}
+  emptyCameraPrefab: {fileID: 6191843896016449502, guid: 3bc99f644e48491459430cc1a1e7215e,
+    type: 3}
+  cameraSwitchInSecondsInterval: 15
   selectedTrackLaps: 3
   aiRacerCount: 0
 --- !u!4 &1446126676

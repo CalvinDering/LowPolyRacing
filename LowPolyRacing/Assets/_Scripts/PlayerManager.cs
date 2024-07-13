@@ -15,9 +15,18 @@ public class PlayerManager : MonoBehaviour {
     private List<Transform> spawnpoints;
     [SerializeField] private List<LayerMask> playerLayers;
     [SerializeField] private GameObject aiCarPrefab;
+    [SerializeField] private GameObject emptyCameraPrefab;
+
+    private float intervalSecondTimer;
+    [SerializeField] private float cameraSwitchInSecondsInterval = 10f;
+
+    private GameObject forthSplitscreenCamera;
+    private CinemachineVirtualCamera forthVirtualCamera;
+    private int forthCameraPlayerIndex = 0;
 
     public int selectedTrackLaps = 3;
     public int aiRacerCount = 0;
+    private int connectedPlayerCount = 0;
 
     private PlayerInputManager playerInputManager;
 
@@ -31,6 +40,21 @@ public class PlayerManager : MonoBehaviour {
 
         for(int i = 0; i < players.Length; i++) {
             players[i] = null;
+        }
+
+        intervalSecondTimer = Time.time;
+    }
+
+    private void Update() {
+        if(connectedPlayerCount == 3) {
+            if(Time.time >= intervalSecondTimer) {
+                intervalSecondTimer += cameraSwitchInSecondsInterval;
+                forthCameraPlayerIndex++;
+                if(forthCameraPlayerIndex >= 3) {
+                    forthCameraPlayerIndex = 0;
+                }
+                SetForthCameraLayerAtPlayer(forthCameraPlayerIndex);
+            }
         }
     }
 
@@ -95,6 +119,10 @@ public class PlayerManager : MonoBehaviour {
         return players;
     }
 
+    private void CalcConnectecPlayerCount() {
+        connectedPlayerCount = players.Where(p => p != null).Count();
+    }
+
     public void RemovePlayer(PlayerInput player) {
         int playerIndex = players.First(p => p == player).playerIndex;
         Destroy(players[playerIndex].gameObject);
@@ -113,6 +141,10 @@ public class PlayerManager : MonoBehaviour {
                 AddPlayerCar(players[i], i);
             }
         }
+
+        CalcConnectecPlayerCount();
+
+        CheckSplitScreenSetup();
     }
 
     public void SetupAICars() {
@@ -122,6 +154,20 @@ public class PlayerManager : MonoBehaviour {
 
             AddAICar(aiCar.GetComponent<CarController>(), i);
         }
+    }
+
+    private void CheckSplitScreenSetup() {
+        if(connectedPlayerCount == 3) {
+            SetupEmptyCamera();
+        }
+    }
+
+    public void SetupEmptyCamera() {
+        forthSplitscreenCamera = Instantiate(emptyCameraPrefab);
+        forthVirtualCamera = forthSplitscreenCamera.GetComponentInChildren<CinemachineVirtualCamera>();
+        int layerToAdd = (int) Mathf.Log(playerLayers[3].value, 2);
+        forthSplitscreenCamera.GetComponentInChildren<CinemachineVirtualCamera>().gameObject.layer = layerToAdd;
+        SetForthCameraLayerAtPlayer(0);
     }
 
     public void SetupSpawnpoints(List<Transform> spawnpoints) {
@@ -147,16 +193,36 @@ public class PlayerManager : MonoBehaviour {
 
         for(int i = 0; i < playerCount; i++) {
 
-            float viewportX = (0.25f * Mathf.Pow(i, 2) - 0.25f * i) % 1;
-            float viewportY = 0.5f * Mathf.Pow(i, 2) % 2;
-            float viewportWidth = playerCount < 3 ? 1 : 0.5f;
-            float viewportHeight = playerCount == 1 ? 1 : 0.5f;
-            Rect viewportRect = new Rect(viewportX, viewportY, viewportWidth, viewportHeight);
-
-            players[i].GetComponentInChildren<Camera>().rect = viewportRect;
+            Rect viewport = GetCameraViewport(i, playerCount);
+            players[i].GetComponentInChildren<Camera>().rect = viewport;
         }
 
         RaceController.Instance.AddRacer(player.GetComponent<CarController>());
+    }
+
+    private Rect GetCameraViewport(int index, int playerCount) {
+
+        float viewportX = (0.25f * Mathf.Pow(index, 2) - 0.25f * index) % 1;
+        float viewportY = 0.5f * Mathf.Pow(index, 2) % 2;
+        float viewportWidth = playerCount < 3 ? 1 : 0.5f;
+        float viewportHeight = playerCount == 1 ? 1 : 0.5f;
+        return new Rect(viewportX, viewportY, viewportWidth, viewportHeight);
+    }
+
+    private void SetForthCameraLayerAtPlayer(int playerIndex) {
+
+        GameObject playerObject = players[playerIndex].gameObject;
+        forthVirtualCamera.Follow = playerObject.transform;
+        forthVirtualCamera.LookAt = players[playerIndex].transform.Find("CarBody");
+        Camera forthCamera = forthSplitscreenCamera.GetComponentInChildren<Camera>();
+
+        for(int i = 0; i < 4; i++) {
+            int layerToRemove = (int) Mathf.Log(playerLayers[i].value, 2);
+            forthCamera.cullingMask &= ~(1 << layerToRemove);
+        }
+
+        int layerToAdd = (int) Mathf.Log(playerLayers[playerIndex].value, 2);
+        forthCamera.cullingMask |= 1 << layerToAdd;
     }
 
     public void AddAICar(CarController controller, int spawnIndex) {
