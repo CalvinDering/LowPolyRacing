@@ -138,7 +138,7 @@ public class RaceController : MonoBehaviour {
         racerPositions.Add(racer);
 
         DisplayRaceStats(racer);        
-        RecalculatePositions(racer);
+        RecalculatePositions();
         racingCars++;
 
         controller.SetIsActive(false);
@@ -159,7 +159,9 @@ public class RaceController : MonoBehaviour {
                         racingCars--;
 
                         List<CarController> playerControllers = PlayerManager.Instance.GetCarControllerFromAllPlayers();
-                        if(playerControllers.All(c => !c.IsActive()) || racingCars <= 0) {
+                        if(playerControllers.Any(c => !c.racer.IsAIRacer() && c.IsActive())) {
+                            // Still human players racing
+                        } else {
                             raceFinished = true;
                             DisplayFinishedRace();
                         }                        
@@ -173,14 +175,16 @@ public class RaceController : MonoBehaviour {
                 DisplayRaceStats(racer);
                 DisplayRacerCheckpointTime(racer);
 
-                RecalculatePositions(racer);
+                RecalculatePositions();
             }
         }
     }
 
-    private void RecalculatePositions(Racer racer) {
-        racerPositions = racerPositions.OrderByDescending(r => r.GetLaps()).ThenByDescending(r => r.GetCurrentCheckpoint()).ThenBy(r => r.GetCheckpointTime()).ThenBy(r => DistanceToNextCheckpoint(r)).ToList();
-        racer.SetPosition(racerPositions.IndexOf(racer) + 1);
+    private void RecalculatePositions() {
+        racerPositions = racerPositions.OrderByDescending(r => r.GetLaps()).ThenByDescending(r => r.GetCurrentCheckpoint()).ThenBy(r => DistanceToNextCheckpoint(r)).ThenBy(r => r.GetCheckpointTime()).ToList();
+        for(int i = 0; i < racerPositions.Count; i++) {
+            racerPositions[i].SetPosition(i + 1);
+        }
         DisplayAllPositions();
     }
 
