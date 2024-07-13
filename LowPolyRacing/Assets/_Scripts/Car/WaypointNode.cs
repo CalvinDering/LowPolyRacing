@@ -10,6 +10,8 @@ public class WaypointNode : MonoBehaviour {
 
     public WaypointNode[] nextWaypointNode;
 
+    public bool isFinishLine = false;
+
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, minDistanceToReachWaypoint);

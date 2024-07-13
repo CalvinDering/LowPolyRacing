@@ -105,6 +105,10 @@ public class RaceController : MonoBehaviour {
         }
     }
 
+    public GameObject GetFinishCheckpoint() {
+        return checkpoints[0];
+    }
+
     private void SetupSpawnpoints() {
         PlayerManager.Instance.SetupSpawnpoints(spawnpoints);
     }

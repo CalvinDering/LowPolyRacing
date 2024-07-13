@@ -172,6 +172,7 @@ MonoBehaviour:
   maxSpeed: 0
   nextWaypointNode:
   - {fileID: 1695426507}
+  isFinishLine: 0
 --- !u!23 &21868268
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1053,6 +1054,7 @@ MonoBehaviour:
   nextWaypointNode:
   - {fileID: 879118276}
   - {fileID: 1491723226}
+  isFinishLine: 0
 --- !u!23 &195010368
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1153,6 +1155,7 @@ MonoBehaviour:
   maxSpeed: 0
   nextWaypointNode:
   - {fileID: 1776294902}
+  isFinishLine: 0
 --- !u!23 &197631475
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1254,6 +1257,7 @@ MonoBehaviour:
   nextWaypointNode:
   - {fileID: 2003909986}
   - {fileID: 1149552105}
+  isFinishLine: 0
 --- !u!23 &214284837
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1632,6 +1636,7 @@ MonoBehaviour:
   maxSpeed: 0
   nextWaypointNode:
   - {fileID: 1050302326}
+  isFinishLine: 0
 --- !u!23 &312383687
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2244,6 +2249,7 @@ MonoBehaviour:
   nextWaypointNode:
   - {fileID: 312383686}
   - {fileID: 1037729837}
+  isFinishLine: 0
 --- !u!23 &536126213
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2568,6 +2574,7 @@ MonoBehaviour:
   maxSpeed: 0
   nextWaypointNode:
   - {fileID: 1776294902}
+  isFinishLine: 0
 --- !u!23 &557705409
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2877,6 +2884,7 @@ MonoBehaviour:
   maxSpeed: 0
   nextWaypointNode:
   - {fileID: 1486982553}
+  isFinishLine: 0
 --- !u!23 &600927136
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3023,6 +3031,7 @@ MonoBehaviour:
   maxSpeed: 0
   nextWaypointNode:
   - {fileID: 1246114912}
+  isFinishLine: 0
 --- !u!23 &641219633
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3422,6 +3431,7 @@ MonoBehaviour:
   maxSpeed: 0
   nextWaypointNode:
   - {fileID: 536126212}
+  isFinishLine: 0
 --- !u!23 &739681300
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3554,6 +3564,7 @@ MonoBehaviour:
   nextWaypointNode:
   - {fileID: 1702854771}
   - {fileID: 2132367030}
+  isFinishLine: 1
 --- !u!23 &800851314
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3719,6 +3730,7 @@ MonoBehaviour:
   nextWaypointNode:
   - {fileID: 1702854771}
   - {fileID: 2132367030}
+  isFinishLine: 1
 --- !u!23 &840908645
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3819,6 +3831,7 @@ MonoBehaviour:
   maxSpeed: 0
   nextWaypointNode:
   - {fileID: 989736537}
+  isFinishLine: 0
 --- !u!23 &879118277
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3904,6 +3917,7 @@ MonoBehaviour:
   maxSpeed: 0
   nextWaypointNode:
   - {fileID: 1010898193}
+  isFinishLine: 0
 --- !u!23 &922227385
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4273,6 +4287,7 @@ MonoBehaviour:
   nextWaypointNode:
   - {fileID: 1060635852}
   - {fileID: 2119460104}
+  isFinishLine: 0
 --- !u!23 &989736538
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4409,6 +4424,7 @@ MonoBehaviour:
   - {fileID: 1294749495}
   - {fileID: 1965270485}
   - {fileID: 1598540627}
+  isFinishLine: 0
 --- !u!23 &1010898194
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4620,6 +4636,7 @@ MonoBehaviour:
   maxSpeed: 70
   nextWaypointNode:
   - {fileID: 1050302326}
+  isFinishLine: 0
 --- !u!23 &1037729838
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4735,6 +4752,7 @@ MonoBehaviour:
   maxSpeed: 0
   nextWaypointNode:
   - {fileID: 195010367}
+  isFinishLine: 0
 --- !u!23 &1050302327
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4836,6 +4854,7 @@ MonoBehaviour:
   nextWaypointNode:
   - {fileID: 1912716220}
   - {fileID: 1196111377}
+  isFinishLine: 0
 --- !u!23 &1060635853
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5040,6 +5059,7 @@ MonoBehaviour:
   nextWaypointNode:
   - {fileID: 922227384}
   - {fileID: 1222514830}
+  isFinishLine: 0
 --- !u!23 &1109763549
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5141,6 +5161,7 @@ MonoBehaviour:
   nextWaypointNode:
   - {fileID: 840908644}
   - {fileID: 800851313}
+  isFinishLine: 0
 --- !u!23 &1149552106
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5226,6 +5247,7 @@ MonoBehaviour:
   maxSpeed: 0
   nextWaypointNode:
   - {fileID: 21868267}
+  isFinishLine: 0
 --- !u!23 &1196111378
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5442,6 +5464,7 @@ MonoBehaviour:
   maxSpeed: 0
   nextWaypointNode:
   - {fileID: 1010898193}
+  isFinishLine: 0
 --- !u!23 &1222514831
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5542,6 +5565,7 @@ MonoBehaviour:
   maxSpeed: 70
   nextWaypointNode:
   - {fileID: 197631474}
+  isFinishLine: 0
 --- !u!23 &1246114913
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5864,6 +5888,7 @@ MonoBehaviour:
   maxSpeed: 70
   nextWaypointNode:
   - {fileID: 214284836}
+  isFinishLine: 0
 --- !u!23 &1294749496
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6277,6 +6302,7 @@ MonoBehaviour:
   nextWaypointNode:
   - {fileID: 1554293950}
   - {fileID: 641219632}
+  isFinishLine: 0
 --- !u!23 &1486982554
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6392,6 +6418,7 @@ MonoBehaviour:
   maxSpeed: 0
   nextWaypointNode:
   - {fileID: 989736537}
+  isFinishLine: 0
 --- !u!23 &1491723227
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6560,6 +6587,7 @@ MonoBehaviour:
   maxSpeed: 0
   nextWaypointNode:
   - {fileID: 1846081360}
+  isFinishLine: 0
 --- !u!23 &1554293951
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6882,6 +6910,7 @@ MonoBehaviour:
   maxSpeed: 50
   nextWaypointNode:
   - {fileID: 214284836}
+  isFinishLine: 0
 --- !u!23 &1598540628
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7286,6 +7315,7 @@ MonoBehaviour:
   nextWaypointNode:
   - {fileID: 1554293950}
   - {fileID: 641219632}
+  isFinishLine: 0
 --- !u!23 &1695426508
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7387,6 +7417,7 @@ MonoBehaviour:
   nextWaypointNode:
   - {fileID: 739681299}
   - {fileID: 1847996901}
+  isFinishLine: 0
 --- !u!23 &1702854772
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7564,6 +7595,7 @@ MonoBehaviour:
   maxSpeed: 0
   nextWaypointNode:
   - {fileID: 1109763548}
+  isFinishLine: 0
 --- !u!23 &1776294903
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7812,6 +7844,7 @@ MonoBehaviour:
   maxSpeed: 0
   nextWaypointNode:
   - {fileID: 557705408}
+  isFinishLine: 0
 --- !u!23 &1846081361
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7912,6 +7945,7 @@ MonoBehaviour:
   maxSpeed: 0
   nextWaypointNode:
   - {fileID: 536126212}
+  isFinishLine: 0
 --- !u!23 &1847996902
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8123,6 +8157,7 @@ MonoBehaviour:
   maxSpeed: 0
   nextWaypointNode:
   - {fileID: 600927135}
+  isFinishLine: 0
 --- !u!23 &1912716221
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8223,6 +8258,7 @@ MonoBehaviour:
   maxSpeed: 50
   nextWaypointNode:
   - {fileID: 214284836}
+  isFinishLine: 0
 --- !u!23 &1965270486
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8380,6 +8416,7 @@ MonoBehaviour:
   nextWaypointNode:
   - {fileID: 840908644}
   - {fileID: 800851313}
+  isFinishLine: 0
 --- !u!23 &2003909987
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8600,6 +8637,7 @@ MonoBehaviour:
   nextWaypointNode:
   - {fileID: 1912716220}
   - {fileID: 1196111377}
+  isFinishLine: 0
 --- !u!23 &2119460105
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8849,6 +8887,7 @@ MonoBehaviour:
   nextWaypointNode:
   - {fileID: 739681299}
   - {fileID: 1847996901}
+  isFinishLine: 0
 --- !u!23 &2132367031
 MeshRenderer:
   m_ObjectHideFlags: 0

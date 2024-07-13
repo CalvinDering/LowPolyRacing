@@ -79,7 +79,10 @@ public class CarAIHandler : MonoBehaviour {
 
     private void FollowWaypoints() {
         if(currentWaypoint == null) {
-            currentWaypoint = FindClosestWaypoint();
+            currentWaypoint = FindFinishLineWaypoint();
+            if(currentWaypoint == null) {
+                currentWaypoint = FindClosestWaypoint();
+            }
             previousWaypoint = currentWaypoint;
         }
 
@@ -110,6 +113,10 @@ public class CarAIHandler : MonoBehaviour {
                 currentWaypoint = currentWaypoint.nextWaypointNode[Random.Range(0, currentWaypoint.nextWaypointNode.Length)];
             }
         }
+    }
+
+    private WaypointNode FindFinishLineWaypoint() {
+        return allWaypoints.First(w => w.isFinishLine);
     }
 
     private WaypointNode FindClosestWaypoint() {
