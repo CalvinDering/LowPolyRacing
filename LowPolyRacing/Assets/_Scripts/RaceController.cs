@@ -17,7 +17,6 @@ public class RaceController : MonoBehaviour {
 
     [Header("Race Settings")]
     [SerializeField] private float raceCountdownTimer = 5f;
-    [SerializeField] private float raceCountdownFadeOutTimer = 0.5f;
     [SerializeField] private string raceStartText = "GOOOO!";
     [SerializeField] private int maxLaps = 3;
 
@@ -82,12 +81,12 @@ public class RaceController : MonoBehaviour {
         int seconds = Mathf.FloorToInt((raceCountdownTimer + 1) % 60);
 
         if(seconds <= 0) {
-            racers.ForEach(r => r.GetController().GetPlayerUIStats().SetCountdownTimerText(raceStartText, raceCountdownFadeOutTimer));
+            racers.ForEach(r => r.GetController().GetPlayerUIStats().SetCountdownTimerText(raceStartText));
             if(SoundFXManager.Instance != null) {
                 SoundFXManager.Instance.PlaySoundFXClip(countdownSound[0], transform, 1f);
             }
         } else {
-            racers.ForEach(r => r.GetController().GetPlayerUIStats().SetCountdownTimerText(seconds.ToString(), raceCountdownFadeOutTimer));
+            racers.ForEach(r => r.GetController().GetPlayerUIStats().SetCountdownTimerText(seconds.ToString()));
             if(SoundFXManager.Instance != null) {
                 SoundFXManager.Instance.PlaySoundFXClip(countdownSound[seconds], transform, 1f);
             }
@@ -128,7 +127,7 @@ public class RaceController : MonoBehaviour {
         racers.Add(racer);
         racerPositions.Add(racer);
 
-        DisplayRaceStats(racer.GetLaps(), racer.GetCurrentCheckpoint());
+        DisplayRaceStats(racer);
         racingCars++;
 
         controller.SetIsActive(false);
@@ -151,7 +150,7 @@ public class RaceController : MonoBehaviour {
                         List<CarController> playerControllers = PlayerManager.Instance.GetCarControllerFromAllPlayers();
                         if(playerControllers.All(c => !c.IsActive()) || racingCars <= 0) {
                             raceFinished = true;
-                            DisplayFinishedRace(racer.GetCheckpointTime());
+                            DisplayFinishedRace();
                         }                        
                     } else {
                         int laps = racer.GetLaps();
@@ -160,7 +159,8 @@ public class RaceController : MonoBehaviour {
                     }
                 }
 
-                DisplayRaceStats(racer.GetLaps(), racer.GetCurrentCheckpoint());
+                DisplayRaceStats(racer);
+                DisplayRacerCheckpointTime(racer);
 
                 RecalculatePositions(racer);
             }
@@ -172,12 +172,22 @@ public class RaceController : MonoBehaviour {
         racer.SetPosition(racerPositions.IndexOf(racer) + 1);
     }
 
-    private void DisplayRaceStats(int laps, int checkpoint) {
-        racers.ForEach(r => r.GetController().GetPlayerUIStats().SetLapCounterText(laps, maxLaps));
-        racers.ForEach(r => r.GetController().GetPlayerUIStats().SetCheckpointCounterText(checkpoint.ToString(), checkpoints.Count - 1));
+    private void DisplayRaceStats(Racer racer) {
+        PlayerUIStats racerStats = racer.GetController().GetPlayerUIStats();
+        racerStats.SetLapCounterText(racer.GetLaps(), maxLaps);
+        racerStats.SetCheckpointCounterText(racer.GetCurrentCheckpoint().ToString(), checkpoints.Count - 1);
     }
 
-    private void DisplayFinishedRace(float finishTime) {
+    private void DisplayRacerCheckpointTime(Racer racer) {
+        PlayerUIStats racerStats = racer.GetController().GetPlayerUIStats();
+        if(raceFinished) {
+            racerStats.SetCheckpointTimeText(racer.GetCheckpointTime(), false);
+        } else {
+            racerStats.SetCheckpointTimeText(racer.GetCheckpointTime());
+        }
+    }
+
+    private void DisplayFinishedRace() {
         raceFinishedText.enabled = true;
     }
 

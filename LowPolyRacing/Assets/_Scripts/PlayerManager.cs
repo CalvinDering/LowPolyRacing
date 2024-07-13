@@ -144,7 +144,7 @@ public class PlayerManager : MonoBehaviour {
     }
 
     public List<CarController> GetCarControllerFromAllPlayers() {
-        List<CarController> controllers = players.Select(p => p.GetComponent<CarController>()).ToList();
+        List<CarController> controllers = players.Where(r => r != null).Select(p => p.GetComponent<CarController>()).ToList();
         return controllers;
     }
 
