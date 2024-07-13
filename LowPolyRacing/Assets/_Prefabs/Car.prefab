@@ -1110,9 +1110,10 @@ GameObject:
   - component: {fileID: 5844009662677931658}
   - component: {fileID: 5357216128450527739}
   - component: {fileID: 4221546617749091884}
+  - component: {fileID: 3737176402864814209}
+  - component: {fileID: 8757771772089505193}
   - component: {fileID: 4358184621738901830}
   - component: {fileID: 503330321942995823}
-  - component: {fileID: 8757771772089505193}
   m_Layer: 7
   m_Name: Car
   m_TagString: Player
@@ -1137,6 +1138,7 @@ Transform:
   - {fileID: 1134594641110394471}
   - {fileID: 4791265453403370562}
   - {fileID: 1884972924128259258}
+  - {fileID: 3923696970538128167}
   - {fileID: 5121737263240551003}
   - {fileID: 8391293479353090045}
   - {fileID: 8395517166250177387}
@@ -1361,6 +1363,43 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 6911427719783892512}
+--- !u!114 &3737176402864814209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455933390501970947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b32142cc4ae180a449b976f0ca7a91f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surfaceLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  centerPoint: {fileID: 3923696970538128167}
+  extendSize: {x: 1.25, y: 0.5, z: 1.75}
+  updateDistance: 5
+--- !u!114 &8757771772089505193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455933390501970947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d8b36de6aeda704c86b4e6dca843e0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  countdownTimerText: {fileID: 8459740096794949803}
+  lapCounterText: {fileID: 6522294789947575543}
+  checkpointCounterText: {fileID: 1261586164199250112}
+  checkpointTimeText: {fileID: 140589978942454582}
+  positionText: {fileID: 7750100869478548050}
+  raceCountdownFadeOutTimer: 0.5
+  checkpointTimeFading: 2
 --- !u!82 &4358184621738901830
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1555,25 +1594,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &8757771772089505193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1455933390501970947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d8b36de6aeda704c86b4e6dca843e0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  countdownTimerText: {fileID: 8459740096794949803}
-  lapCounterText: {fileID: 6522294789947575543}
-  checkpointCounterText: {fileID: 1261586164199250112}
-  checkpointTimeText: {fileID: 140589978942454582}
-  positionText: {fileID: 7750100869478548050}
-  raceCountdownFadeOutTimer: 0.5
-  checkpointTimeFading: 2
 --- !u!1 &1463489447998713725
 GameObject:
   m_ObjectHideFlags: 0
@@ -4792,6 +4812,59 @@ Transform:
   - {fileID: 7452027021618924899}
   m_Father: {fileID: 8063633929876962926}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5200442704165409541
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3923696970538128167}
+  - component: {fileID: 9169269216128352877}
+  m_Layer: 7
+  m_Name: SurfaceDetectionPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3923696970538128167
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5200442704165409541}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.45, z: -0.185}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1770613814418363781}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &9169269216128352877
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5200442704165409541}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 2.5, y: 1, z: 3.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5211571431927096143
 GameObject:
   m_ObjectHideFlags: 0
