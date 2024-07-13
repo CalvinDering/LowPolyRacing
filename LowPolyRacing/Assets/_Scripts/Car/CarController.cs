@@ -12,6 +12,7 @@ public class CarController : MonoBehaviour {
     [SerializeField] private Transform accelerationPoint;
     [SerializeField] private GameObject[] tires = new GameObject[4];
     [SerializeField] private GameObject[] frontTireParents = new GameObject[2];
+    [SerializeField] private PlayerUIStats playerUIStats;
 
     private CarInputHandler inputHandler = null;
 
@@ -64,6 +65,7 @@ public class CarController : MonoBehaviour {
 
     private void Awake() {
         carRB = GetComponent<Rigidbody>();
+        playerUIStats = GetComponent<PlayerUIStats>();
 
         if(gameObject.tag == "Player") {
             DontDestroyOnLoad(gameObject);
@@ -99,6 +101,10 @@ public class CarController : MonoBehaviour {
 
     public bool IsActive() {
         return isActive;
+    }
+
+    public PlayerUIStats GetPlayerUIStats() {
+        return playerUIStats;
     }
 
     #region Movement

@@ -389,7 +389,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &57459191
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1658,7 +1658,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &287583155
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2110,14 +2110,12 @@ MonoBehaviour:
   - {fileID: 571153908}
   - {fileID: 555589756}
   racers: []
+  racerPositions: []
   spawnpoints:
   - {fileID: 988384548}
   - {fileID: 1613742640}
   - {fileID: 602875738}
   - {fileID: 763730160}
-  countdownTimerText: {fileID: 287583156}
-  lapCounterText: {fileID: 57459192}
-  checkpointCounterText: {fileID: 875526402}
   raceFinishedText: {fileID: 2015708372}
   countdownSound:
   - {fileID: 8300000, guid: b7d5f994d92fb72409cb49c216fe53d0, type: 3}
@@ -4058,7 +4056,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &875526401
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5873,7 +5871,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1083214612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9982,7 +9980,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2015708371
 RectTransform:
   m_ObjectHideFlags: 0

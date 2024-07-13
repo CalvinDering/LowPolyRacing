@@ -12,9 +12,6 @@ public class RaceController : MonoBehaviour {
     [SerializeField] private List<Racer> racers = new List<Racer>();
     [SerializeField] private List<Racer> racerPositions = new List<Racer>();
     [SerializeField] private List<Transform> spawnpoints;
-    [SerializeField] private TextMeshProUGUI countdownTimerText;
-    [SerializeField] private TextMeshProUGUI lapCounterText;
-    [SerializeField] private TextMeshProUGUI checkpointCounterText;
     [SerializeField] private TextMeshProUGUI raceFinishedText;
     [SerializeField] private AudioClip[] countdownSound;
 
@@ -85,25 +82,15 @@ public class RaceController : MonoBehaviour {
         int seconds = Mathf.FloorToInt((raceCountdownTimer + 1) % 60);
 
         if(seconds <= 0) {
-            countdownTimerText.text = raceStartText;
-            StartCoroutine(FadeTextToZeroAlpha(raceCountdownFadeOutTimer, countdownTimerText));
+            racers.ForEach(r => r.GetController().GetPlayerUIStats().SetCountdownTimerText(raceStartText, raceCountdownFadeOutTimer));
             if(SoundFXManager.Instance != null) {
                 SoundFXManager.Instance.PlaySoundFXClip(countdownSound[0], transform, 1f);
             }
         } else {
-            countdownTimerText.text = seconds.ToString();
-            StartCoroutine(FadeTextToZeroAlpha(raceCountdownFadeOutTimer, countdownTimerText));
+            racers.ForEach(r => r.GetController().GetPlayerUIStats().SetCountdownTimerText(seconds.ToString(), raceCountdownFadeOutTimer));
             if(SoundFXManager.Instance != null) {
                 SoundFXManager.Instance.PlaySoundFXClip(countdownSound[seconds], transform, 1f);
             }
-        }
-    }
-
-    private IEnumerator FadeTextToZeroAlpha(float timer, TextMeshProUGUI text) {
-        text.color = new Color(text.color.r, text.color.g, text.color.b);
-        while(text.color.a > 0.0f) {
-            text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a - (Time.deltaTime / timer));
-            yield return null;
         }
     }
 
@@ -186,9 +173,8 @@ public class RaceController : MonoBehaviour {
     }
 
     private void DisplayRaceStats(int laps, int checkpoint) {
-
-        lapCounterText.text = "Laps: " + laps.ToString() + " / " + maxLaps;
-        checkpointCounterText.text = "CP: " + checkpoint.ToString() + " / " + (checkpoints.Count - 1);
+        racers.ForEach(r => r.GetController().GetPlayerUIStats().SetLapCounterText(laps, maxLaps));
+        racers.ForEach(r => r.GetController().GetPlayerUIStats().SetCheckpointCounterText(checkpoint.ToString(), checkpoints.Count - 1));
     }
 
     private void DisplayFinishedRace(float finishTime) {
