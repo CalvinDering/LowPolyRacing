@@ -6,6 +6,7 @@ using UnityEngine;
 public class Racer : MonoBehaviour {
 
     private int id;
+    private bool isAIRacer;
     private CarController controller;
     private int laps;
     private int currentCheckpoint;
@@ -58,5 +59,13 @@ public class Racer : MonoBehaviour {
 
     public float GetCheckpointTime() {
         return checkpointTime;
+    }
+
+    public void SetIsAIRacer(bool isAIRacer) {
+        this.isAIRacer = isAIRacer;
+    }
+
+    public bool IsAIRacer() {
+        return isAIRacer;
     }
 }

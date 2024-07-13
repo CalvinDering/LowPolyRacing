@@ -11,8 +11,10 @@ public class PlayerManager : MonoBehaviour {
     public static PlayerManager Instance;
 
     private PlayerInput[] players = new PlayerInput[4];
+    private List<GameObject> aiCars = new List<GameObject>();
     private List<Transform> spawnpoints;
     [SerializeField] private List<LayerMask> playerLayers;
+    [SerializeField] private GameObject aiCarPrefab;
 
     public int selectedTrackLaps = 3;
     public int aiRacerCount = 0;
@@ -47,26 +49,30 @@ public class PlayerManager : MonoBehaviour {
     public void SetAllPlayerComponents(bool isActive) {
         foreach(PlayerInput player in players) {
             if(player != null) {
-                SetPlayerComponents(player, isActive);
+                SetPlayerComponents(player.GetComponent<Racer>(), isActive, false);
             }
         }
     }
 
-    public void SetPlayerComponents(PlayerInput player, bool isActive) {
-        player.gameObject.GetComponent<CarController>().enabled = isActive;
-        player.gameObject.GetComponent<Rigidbody>().isKinematic = !isActive;
-        player.gameObject.GetComponent<CarInputHandler>().enabled = isActive;
-        AudioSource[] audioSources = player.gameObject.GetComponents<AudioSource>();
+    public void SetPlayerComponents(Racer racer, bool isActive, bool isAI) {
+        racer.GetComponent<CarController>().enabled = isActive;
+        racer.GetComponent<Rigidbody>().isKinematic = !isActive;
+
+        AudioSource[] audioSources = racer.GetComponents<AudioSource>();
         foreach(AudioSource audio in audioSources) {
             audio.enabled = isActive;
         }
-        player.gameObject.GetComponentInChildren<AudioListener>().enabled = isActive;
-        player.transform.Find("Canvas").gameObject.SetActive(isActive);
+
+        if(!isAI) {
+            racer.GetComponent<CarInputHandler>().enabled = isActive;
+            racer.GetComponentInChildren<AudioListener>().enabled = isActive;
+            racer.transform.Find("Canvas").gameObject.SetActive(isActive);
+        }
     }
 
     public void AddPlayer(PlayerInput player) {
 
-        SetPlayerComponents(player, false);
+        SetPlayerComponents(player.GetComponent<Racer>(), false, false);
 
         int playerIndex = -1;
         for(int i = 0; i < players.Length; i++) {
@@ -109,6 +115,15 @@ public class PlayerManager : MonoBehaviour {
         }
     }
 
+    public void SetupAICars() {
+        for(int i = 0; i < aiRacerCount; i++) {
+            GameObject aiCar = Instantiate(aiCarPrefab);
+            aiCars.Add(aiCar);
+
+            AddAICar(aiCar.GetComponent<CarController>(), i);
+        }
+    }
+
     public void SetupSpawnpoints(List<Transform> spawnpoints) {
         this.spawnpoints = spawnpoints;
     }
@@ -121,7 +136,7 @@ public class PlayerManager : MonoBehaviour {
             }
         }
 
-        player.transform.GetComponent<Rigidbody>().position = spawnpoints[playerIndex].position;
+        player.transform.GetComponent<Rigidbody>().position = spawnpoints[playerIndex + aiRacerCount].position;
 
         int layerToAdd = (int) Mathf.Log(playerLayers[playerIndex].value, 2);
 
@@ -142,6 +157,12 @@ public class PlayerManager : MonoBehaviour {
         }
 
         RaceController.Instance.AddRacer(player.GetComponent<CarController>());
+    }
+
+    public void AddAICar(CarController controller, int spawnIndex) {
+        controller.GetComponent<Rigidbody>().position = spawnpoints[spawnIndex].position;
+
+        RaceController.Instance.AddRacer(controller, true);
     }
 
     public List<CarController> GetCarControllerFromAllPlayers() {

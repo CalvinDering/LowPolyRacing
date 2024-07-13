@@ -2992,6 +2992,10 @@ MonoBehaviour:
     m_Bits: 4096
   - serializedVersion: 2
     m_Bits: 8192
+  aiCarPrefab: {fileID: 6498965619865622158, guid: 7740aeebb0c9c27409ce91a797e536cb,
+    type: 3}
+  selectedTrackLaps: 3
+  aiRacerCount: 0
 --- !u!4 &1446126676
 Transform:
   m_ObjectHideFlags: 0
@@ -3245,9 +3249,6 @@ MonoBehaviour:
   - {fileID: 456667622}
   - {fileID: 1614459222}
   joinMessage: X to join
-  selectedTrackId: 0
-  selectedTrackLaps: 3
-  aiRacerCount: 0
 --- !u!1 &1558854828
 GameObject:
   m_ObjectHideFlags: 0

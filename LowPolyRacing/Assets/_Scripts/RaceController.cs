@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using TMPro;
-using UnityEngine.InputSystem;
 
 public class RaceController : MonoBehaviour {
 
@@ -46,6 +45,7 @@ public class RaceController : MonoBehaviour {
         raceFinishedText.enabled = false;
         SetupCheckpoints();
         SetupSpawnpoints();
+        SetupAI();
         SetupPlayers();
         onceSecondTimer = Time.time;
     }
@@ -80,15 +80,21 @@ public class RaceController : MonoBehaviour {
     private void DisplayCountdownTime(float raceCountdownTimer) {
         int seconds = Mathf.FloorToInt((raceCountdownTimer + 1) % 60);
 
-        if(seconds <= 0) {
-            racers.ForEach(r => r.GetController().GetPlayerUIStats().SetCountdownTimerText(raceStartText));
-            if(SoundFXManager.Instance != null) {
-                SoundFXManager.Instance.PlaySoundFXClip(countdownSound[0], transform, 1f);
+        foreach(Racer racer in racers) {
+            if(racer.IsAIRacer()) {
+                continue;
             }
-        } else {
-            racers.ForEach(r => r.GetController().GetPlayerUIStats().SetCountdownTimerText(seconds.ToString()));
-            if(SoundFXManager.Instance != null) {
-                SoundFXManager.Instance.PlaySoundFXClip(countdownSound[seconds], transform, 1f);
+
+            if(seconds <= 0) {
+                racer.GetController().GetPlayerUIStats().SetCountdownTimerText(raceStartText);
+                if(SoundFXManager.Instance != null) {
+                    SoundFXManager.Instance.PlaySoundFXClip(countdownSound[0], transform, 1f);
+                }
+            } else {
+                racer.GetController().GetPlayerUIStats().SetCountdownTimerText(seconds.ToString());
+                if(SoundFXManager.Instance != null) {
+                    SoundFXManager.Instance.PlaySoundFXClip(countdownSound[seconds], transform, 1f);
+                }
             }
         }
     }
@@ -103,31 +109,31 @@ public class RaceController : MonoBehaviour {
         PlayerManager.Instance.SetupSpawnpoints(spawnpoints);
     }
 
-    private void SetupPlayers() {
-        /*CarController[] players = FindObjectsOfType<CarController>();
-        for(int i = 0; i < players.Length; i++) {
+    private void SetupAI() {
+        PlayerManager.Instance.SetupAICars();
+    }
 
-            AddRacer(players[i]);
-        }*/
+    private void SetupPlayers() {
 
         PlayerManager.Instance.SetupPlayerCars();
 
         setupFinished = true;
     }
 
-    public void AddRacer(CarController controller) {
+    public void AddRacer(CarController controller, bool isAI = false) {
         Racer racer = controller.GetComponent<Racer>();
 
-        PlayerManager.Instance.SetPlayerComponents(controller.gameObject.GetComponent<PlayerInput>(), true);
+        PlayerManager.Instance.SetPlayerComponents(racer, true, isAI);
 
         racer.SetId(racers.Count);
         racer.SetLaps(1);
         racer.SetCurrentCheckpoint(0);
+        racer.SetIsAIRacer(isAI);
         controller.racer = racer;
         racers.Add(racer);
         racerPositions.Add(racer);
 
-        DisplayRaceStats(racer);
+        DisplayRaceStats(racer);        
         RecalculatePositions(racer);
         racingCars++;
 
@@ -185,12 +191,20 @@ public class RaceController : MonoBehaviour {
     }
 
     private void DisplayRaceStats(Racer racer) {
+        if(racer.IsAIRacer()) {
+            return;
+        }
+
         PlayerUIStats racerStats = racer.GetController().GetPlayerUIStats();
         racerStats.SetLapCounterText(racer.GetLaps(), maxLaps);
         racerStats.SetCheckpointCounterText(racer.GetCurrentCheckpoint().ToString(), checkpoints.Count - 1);
     }
 
     private void DisplayRacerCheckpointTime(Racer racer) {
+        if(racer.IsAIRacer()) {
+            return;
+        }
+
         PlayerUIStats racerStats = racer.GetController().GetPlayerUIStats();
         if(raceFinished) {
             racerStats.SetCheckpointTimeText(racer.GetCheckpointTime(), false);
@@ -200,7 +214,13 @@ public class RaceController : MonoBehaviour {
     }
 
     private void DisplayAllPositions() {
-        racers.ForEach(r => r.GetController().GetPlayerUIStats().SetPosition(r.GetPosition()));
+        foreach(Racer racer in racers) {
+            if(racer.IsAIRacer()) {
+                continue;
+            }
+
+            racer.GetController().GetPlayerUIStats().SetPosition(racer.GetPosition());
+        }
     }
 
     private void DisplayFinishedRace() {
