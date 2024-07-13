@@ -10,6 +10,7 @@ public class RaceController : MonoBehaviour {
     [Header("References")]
     [SerializeField] private List<GameObject> checkpoints;
     [SerializeField] private List<Racer> racers = new List<Racer>();
+    [SerializeField] private List<Racer> racerPositions = new List<Racer>();
     [SerializeField] private List<Transform> spawnpoints;
     [SerializeField] private TextMeshProUGUI countdownTimerText;
     [SerializeField] private TextMeshProUGUI lapCounterText;
@@ -22,6 +23,8 @@ public class RaceController : MonoBehaviour {
     [SerializeField] private float raceCountdownFadeOutTimer = 0.5f;
     [SerializeField] private string raceStartText = "GOOOO!";
     [SerializeField] private int maxLaps = 3;
+
+    private float timeTillRaceStarted;
 
     private bool setupFinished = false;
     private bool raceFinished = false;
@@ -72,6 +75,7 @@ public class RaceController : MonoBehaviour {
         foreach(Racer racer in racers) {
             racer.GetController().SetIsActive(true);
         }
+        timeTillRaceStarted = Time.time;
     }
     public bool IsRaceFinished() {
         return raceFinished;
@@ -135,6 +139,7 @@ public class RaceController : MonoBehaviour {
         racer.SetCurrentCheckpoint(0);
         controller.racer = racer;
         racers.Add(racer);
+        racerPositions.Add(racer);
 
         DisplayRaceStats(racer.GetLaps(), racer.GetCurrentCheckpoint());
         racingCars++;
@@ -148,6 +153,7 @@ public class RaceController : MonoBehaviour {
             int checkpointId = checkpoint.GetId();
             if(checkpointId == racer.GetCurrentCheckpoint() + 1 || (racer.GetCurrentCheckpoint() == checkpoints.Count - 1 && checkpoint.IsFinish())) {
                 racer.SetCurrentCheckpoint(checkpointId);
+                racer.SetCheckpointTime(timeTillRaceStarted);
 
                 if(checkpoint.IsFinish()) {
                     if(racer.GetLaps() >= maxLaps) {
@@ -158,7 +164,7 @@ public class RaceController : MonoBehaviour {
                         List<CarController> playerControllers = PlayerManager.Instance.GetCarControllerFromAllPlayers();
                         if(playerControllers.All(c => !c.IsActive()) || racingCars <= 0) {
                             raceFinished = true;
-                            DisplayFinishedRace();
+                            DisplayFinishedRace(racer.GetCheckpointTime());
                         }                        
                     } else {
                         int laps = racer.GetLaps();
@@ -168,8 +174,15 @@ public class RaceController : MonoBehaviour {
                 }
 
                 DisplayRaceStats(racer.GetLaps(), racer.GetCurrentCheckpoint());
+
+                RecalculatePositions(racer);
             }
         }
+    }
+
+    private void RecalculatePositions(Racer racer) {
+        racerPositions = racerPositions.OrderByDescending(r => r.GetLaps()).ThenByDescending(r => r.GetCurrentCheckpoint()).ThenBy(r => r.GetCheckpointTime()).ToList();
+        racer.SetPosition(racerPositions.IndexOf(racer) + 1);
     }
 
     private void DisplayRaceStats(int laps, int checkpoint) {
@@ -178,7 +191,7 @@ public class RaceController : MonoBehaviour {
         checkpointCounterText.text = "CP: " + checkpoint.ToString() + " / " + (checkpoints.Count - 1);
     }
 
-    private void DisplayFinishedRace() {
+    private void DisplayFinishedRace(float finishTime) {
         raceFinishedText.enabled = true;
     }
 

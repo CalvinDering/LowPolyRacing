@@ -8,6 +8,8 @@ public class Racer : MonoBehaviour {
     private CarController controller;
     private int laps;
     private int currentCheckpoint;
+    private int position;
+    private float checkpointTime;
 
     private void Awake() {
         controller = GetComponent<CarController>();
@@ -39,5 +41,21 @@ public class Racer : MonoBehaviour {
     
     public int GetCurrentCheckpoint() {
         return currentCheckpoint;
+    }
+
+    public void SetPosition(int position) {
+        this.position = position;
+    }
+
+    public int GetPosition() {
+        return position;
+    }
+
+    public void SetCheckpointTime(float startupTime) {
+        checkpointTime = Time.time - startupTime;
+    }
+
+    public float GetCheckpointTime() {
+        return checkpointTime;
     }
 }

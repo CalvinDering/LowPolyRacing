@@ -79,8 +79,6 @@ public class PlayerManager : MonoBehaviour {
             return;
         }
 
-        player.onControlsChanged += RemovePlayer;
-
         players[playerIndex] = player;
         TrackSelectionUIHandler.Instance.AddPlayerDisplay(playerIndex);
     }
@@ -94,8 +92,6 @@ public class PlayerManager : MonoBehaviour {
         Destroy(players[playerIndex].gameObject);
         TrackSelectionUIHandler.Instance.RemovePlayerDisplay(playerIndex);
         players[playerIndex] = null;
-
-        player.onControlsChanged -= RemovePlayer;
     }
 
     private int GetPlayerCount() {
@@ -104,9 +100,9 @@ public class PlayerManager : MonoBehaviour {
     }
 
     public void SetupPlayerCars() {
-        foreach(PlayerInput player in players) {
-            if(player != null) {
-                AddPlayerCar(player);
+        for(int i = 0; i < players.Count(); i++) {
+            if(players[i] != null) {
+                AddPlayerCar(players[i], i);
             }
         }
     }
@@ -115,10 +111,17 @@ public class PlayerManager : MonoBehaviour {
         this.spawnpoints = spawnpoints;
     }
 
-    public void AddPlayerCar(PlayerInput player) {
-        player.transform.GetComponent<Rigidbody>().position = spawnpoints[players.Length - 1].position;
+    public void AddPlayerCar(PlayerInput player, int playerIndex) {
+        int activePlayers = 0;
+        for(int i = 0; i < players.Length; i++) {
+            if(players[i] != null) {
+                activePlayers++;
+            }
+        }
 
-        int layerToAdd = (int) Mathf.Log(playerLayers[players.Length - 1].value, 2);
+        player.transform.GetComponent<Rigidbody>().position = spawnpoints[playerIndex].position;
+
+        int layerToAdd = (int) Mathf.Log(playerLayers[playerIndex].value, 2);
 
         player.GetComponentInChildren<CinemachineVirtualCamera>().gameObject.layer = layerToAdd;
         player.GetComponentInChildren<Camera>().cullingMask |= 1 << layerToAdd;
