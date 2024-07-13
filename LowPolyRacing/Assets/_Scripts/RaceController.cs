@@ -23,7 +23,6 @@ public class RaceController : MonoBehaviour {
 
     private bool setupFinished = false;
     private bool raceFinished = false;
-    private int racingCars = 0;
 
     private float onceSecondTimer;
     public static float ONCE_PER_SECOND_INTERVAL = 1f;
@@ -139,7 +138,6 @@ public class RaceController : MonoBehaviour {
 
         DisplayRaceStats(racer);        
         RecalculatePositions();
-        racingCars++;
 
         controller.SetIsActive(false);
     }
@@ -156,7 +154,6 @@ public class RaceController : MonoBehaviour {
                     if(racer.GetLaps() >= maxLaps) {
                         // Race won
                         car.SetIsActive(false);
-                        racingCars--;
 
                         List<CarController> playerControllers = PlayerManager.Instance.GetCarControllerFromAllPlayers();
                         if(playerControllers.Any(c => !c.racer.IsAIRacer() && c.IsActive())) {
