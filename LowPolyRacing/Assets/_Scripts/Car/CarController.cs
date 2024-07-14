@@ -42,6 +42,8 @@ public class CarController : MonoBehaviour {
     [SerializeField] private float deceleration = 10f;
     [SerializeField] private float steerStrength = 15f;
     [SerializeField] private AnimationCurve turningCurve;
+    [SerializeField] private float dragWithNoInput = 3f;
+    [SerializeField] private float dragTime = 3f;
     [SerializeField] private float dragCoefficient = 1f;
     [SerializeField] private float brakingDeceleration = 100f;
     [SerializeField] private float brakingDragCoefficient = 0.5f;
@@ -119,7 +121,8 @@ public class CarController : MonoBehaviour {
 
         if(isGrounded) {
             Acceleration();
-            Deceleration();
+            ForwardsDrag();
+            //Deceleration(); Disabled because it is basically forwards drag
             Turn();
             SidewaysDrag();
         } else {
@@ -141,11 +144,58 @@ public class CarController : MonoBehaviour {
         carRB.AddRelativeTorque(steerStrength * steerInput * turningCurve.Evaluate(Mathf.Abs(carVelocityRatio)) * Mathf.Sign(carVelocityRatio) * transform.up, ForceMode.Acceleration);
     }
 
+    private void ForwardsDrag() {
+
+        if(moveInput == 0) {
+            carRB.drag = Mathf.Lerp(carRB.drag, dragWithNoInput, Time.fixedDeltaTime * dragTime);
+        } else {
+            carRB.drag = Mathf.Lerp(carRB.drag, Surface.roadSurfaceDrag, Time.fixedDeltaTime * dragTime);
+        }
+
+        switch(GetSurface()) {
+            case Surface.SurfaceType.Road:
+                carRB.drag = Mathf.Lerp(carRB.drag, Surface.roadSurfaceDrag, Time.fixedDeltaTime * dragTime);
+                break;
+            case Surface.SurfaceType.Grass:
+                carRB.drag = Mathf.Lerp(carRB.drag, Surface.grassSurfaceDrag, Time.fixedDeltaTime * dragTime);
+                break;
+            case Surface.SurfaceType.Sand:
+                carRB.drag = Mathf.Lerp(carRB.drag, Surface.sandSurfaceDrag, Time.fixedDeltaTime * dragTime);
+                break;
+            case Surface.SurfaceType.Water:
+                carRB.drag = Mathf.Lerp(carRB.drag, Surface.waterSurfaceDrag, Time.fixedDeltaTime * dragTime);
+                break;
+            case Surface.SurfaceType.Oil:
+                carRB.drag = Surface.oilSurfaceDrag;
+                break;
+        }
+    }
+
     private void SidewaysDrag() {
         float currentSidewaysSpeed = currectCarLocalVelocity.x;
         float dragMagnitude = -currentSidewaysSpeed * (handbrakeActive ? brakingDragCoefficient : dragCoefficient);
 
-        Vector3 dragForce = transform.right * dragMagnitude;
+        float driftFactor = dragMagnitude;
+
+        switch(GetSurface()) {
+            case Surface.SurfaceType.Road:
+                driftFactor *= Surface.roadDriftModifier;
+                break;
+            case Surface.SurfaceType.Grass:
+                driftFactor *= Surface.grassDriftModifier;
+                break;
+            case Surface.SurfaceType.Sand:
+                driftFactor *= Surface.sandDriftModifier;
+                break;
+            case Surface.SurfaceType.Water:
+                driftFactor *= Surface.waterDriftModifier;
+                break;
+            case Surface.SurfaceType.Oil:
+                driftFactor = Surface.oilDriftModifier;
+                break;
+        }
+
+        Vector3 dragForce = transform.right * driftFactor;
 
         carRB.AddForceAtPosition(dragForce, carRB.worldCenterOfMass, ForceMode.Acceleration);
     }
@@ -293,22 +343,22 @@ public class CarController : MonoBehaviour {
 
             if(toggle) {
                 smokeEmission.rateOverTime = 100;
-                Color startColor = new Color(0.83f, 0.83f, 0.83f);
-                switch(surfaceHandler.GetCurrentSurface()) {
+                Color startColor = Surface.roadSurfaceSmokeColor;
+                switch(GetSurface()) {
                     case Surface.SurfaceType.Road:
                         return;
                     case Surface.SurfaceType.Grass:
-                        startColor = new Color(0.15f, 0.4f, 0.2f);
+                        startColor = Surface.grassSurfaceSmokeColor;
                         break;
                     case Surface.SurfaceType.Sand:
-                        startColor = new Color(0.64f, 0.42f, 0.24f);
+                        startColor = Surface.sandSurfaceSmokeColor;
                         break;
                     case Surface.SurfaceType.Water:
-                        startColor = new Color(0.25f, 0.25f, 0.8f);
+                        startColor = Surface.waterSurfaceSmokeColor;
                         break;
                     case Surface.SurfaceType.Oil:
                         smokeEmission.rateOverTime = 200;
-                        startColor = new Color(0.2f, 0.2f, 0.2f);
+                        startColor = Surface.oilSurfaceSmokeColor;
                         break;
                 }
                 smoke.startColor = startColor;
@@ -318,8 +368,6 @@ public class CarController : MonoBehaviour {
                 smokeSystem.Stop();
             }
         }
-
-        
     }
 
     private void ToggleSkidSounds(bool toggle) {
