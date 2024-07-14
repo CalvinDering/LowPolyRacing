@@ -873,7 +873,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1146958479618272859}
   serializedVersion: 8
-  lengthInSec: 5
+  lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -1702,7 +1702,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 100
+      scalar: 200
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -1827,8 +1827,8 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.06487695
         - serializedVersion: 3
-          time: 0.12328005
-          value: 0.88824546
+          time: 0.09867525
+          value: 1
           inSlope: -0.2899353
           outSlope: -0.2899353
           tangentMode: 0
@@ -5643,7 +5643,7 @@ ParticleSystemRenderer:
   m_MeshDistribution: 0
   m_SortMode: 0
   m_MinParticleSize: 0
-  m_MaxParticleSize: 0.5
+  m_MaxParticleSize: 5
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2
@@ -5995,7 +5995,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1000
   m_Drag: 0.2
-  m_AngularDrag: 15
+  m_AngularDrag: 16
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -6030,9 +6030,9 @@ MonoBehaviour:
   - {fileID: 5710458638613224936}
   - {fileID: 446758034408316003}
   - {fileID: 4039264004823141584}
-  drivable:
+  surfaceLayermask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 256
   accelerationPoint: {fileID: 1884972924128259258}
   tires:
   - {fileID: 2469830197918359634}
@@ -6059,7 +6059,7 @@ MonoBehaviour:
   springTravel: 0.125
   wheelRadius: 0.38
   racer: {fileID: 0}
-  acceleration: 25
+  acceleration: 30
   maxSpeed: 100
   deceleration: 20
   steerStrength: 30
@@ -6223,7 +6223,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   centerPoint: {fileID: 3923696970538128167}
-  extendSize: {x: 1.25, y: 0.5, z: 1.75}
+  extendSize: {x: 1.25, y: 0.7, z: 1.75}
   updateDistance: 5
 --- !u!114 &-6394303183535981472
 MonoBehaviour:
@@ -11055,7 +11055,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6288339571068914404}
   serializedVersion: 8
-  lengthInSec: 5
+  lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -11884,7 +11884,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 100
+      scalar: 200
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -12009,8 +12009,8 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.06487695
         - serializedVersion: 3
-          time: 0.12328005
-          value: 0.88824546
+          time: 0.09867525
+          value: 1
           inSlope: -0.2899353
           outSlope: -0.2899353
           tangentMode: 0
@@ -15825,7 +15825,7 @@ ParticleSystemRenderer:
   m_MeshDistribution: 0
   m_SortMode: 0
   m_MinParticleSize: 0
-  m_MaxParticleSize: 0.5
+  m_MaxParticleSize: 5
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2

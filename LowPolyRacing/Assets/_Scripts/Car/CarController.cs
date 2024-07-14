@@ -8,7 +8,7 @@ public class CarController : MonoBehaviour {
     [Header("References")]
     [SerializeField] private Rigidbody carRB;
     [SerializeField] private Transform[] rayPoints;
-    [SerializeField] private LayerMask drivable;
+    [SerializeField] private LayerMask surfaceLayermask;
     [SerializeField] private Transform accelerationPoint;
     [SerializeField] private GameObject[] tires = new GameObject[4];
     [SerializeField] private GameObject[] frontTireParents = new GameObject[2];
@@ -124,7 +124,7 @@ public class CarController : MonoBehaviour {
         if(isGrounded) {
             Acceleration();
             ForwardsDrag();
-            Deceleration(); //Disabled because it is basically forwards drag
+            //Deceleration(); Disabled because it is basically forwards drag
             Turn();
             SidewaysDrag();
 
@@ -141,9 +141,7 @@ public class CarController : MonoBehaviour {
     }
 
     private void Deceleration() {
-        if(handbrakeActive) {
-            carRB.AddForce((handbrakeActive ? brakingDeceleration : deceleration) * carVelocityRatio * -carRB.transform.forward, ForceMode.Acceleration);
-        }
+        carRB.AddForce((handbrakeActive ? brakingDeceleration : deceleration) * carVelocityRatio * -carRB.transform.forward, ForceMode.Acceleration);
     }
 
     private void Turn() {
@@ -160,16 +158,16 @@ public class CarController : MonoBehaviour {
 
         switch(GetSurface()) {
             case Surface.SurfaceType.Road:
-                carRB.drag = Mathf.Lerp(carRB.drag, Surface.roadSurfaceDrag, Time.fixedDeltaTime * dragTime);
+                carRB.drag = Mathf.Lerp(carRB.drag, Surface.roadSurfaceDrag, Time.fixedDeltaTime);
                 break;
             case Surface.SurfaceType.Grass:
-                carRB.drag = Mathf.Lerp(carRB.drag, Surface.grassSurfaceDrag, Time.fixedDeltaTime * dragTime);
+                carRB.drag = Mathf.Lerp(carRB.drag, Surface.grassSurfaceDrag, Time.fixedDeltaTime);
                 break;
             case Surface.SurfaceType.Sand:
-                carRB.drag = Mathf.Lerp(carRB.drag, Surface.sandSurfaceDrag, Time.fixedDeltaTime * dragTime);
+                carRB.drag = Mathf.Lerp(carRB.drag, Surface.sandSurfaceDrag, Time.fixedDeltaTime);
                 break;
             case Surface.SurfaceType.Water:
-                carRB.drag = Mathf.Lerp(carRB.drag, Surface.waterSurfaceDrag, Time.fixedDeltaTime * dragTime);
+                carRB.drag = Mathf.Lerp(carRB.drag, Surface.waterSurfaceDrag, Time.fixedDeltaTime);
                 break;
             case Surface.SurfaceType.Oil:
                 carRB.drag = Surface.oilSurfaceDrag;
@@ -194,7 +192,7 @@ public class CarController : MonoBehaviour {
                 driftFactor *= Surface.sandDriftModifier;
                 break;
             case Surface.SurfaceType.Water:
-                driftFactor *= Surface.waterDriftModifier;
+                driftFactor = Surface.waterDriftModifier;
                 break;
             case Surface.SurfaceType.Oil:
                 driftFactor = Surface.oilDriftModifier;
@@ -278,7 +276,7 @@ public class CarController : MonoBehaviour {
             RaycastHit hit;
             float maxDistance = restLength + springTravel;
 
-            if(Physics.Raycast(rayPoints[i].position, -rayPoints[i].up, out hit, maxDistance + wheelRadius, drivable)) {
+            if(Physics.Raycast(rayPoints[i].position, -rayPoints[i].up, out hit, maxDistance + wheelRadius, surfaceLayermask)) {
                 wheelsIsGrounded[i] = 1;
 
                 float currentSpringLength = hit.distance - wheelRadius;
@@ -358,7 +356,6 @@ public class CarController : MonoBehaviour {
             ParticleSystem.EmissionModule smokeEmission = smokeSystem.emission;
 
             if(toggle) {
-                smokeEmission.rateOverTime = 100;
                 Color startColor = Surface.roadSurfaceSmokeColor;
                 switch(GetSurface()) {
                     case Surface.SurfaceType.Road:
@@ -373,14 +370,15 @@ public class CarController : MonoBehaviour {
                         startColor = Surface.waterSurfaceSmokeColor;
                         break;
                     case Surface.SurfaceType.Oil:
-                        smokeEmission.rateOverTime = 200;
                         startColor = Surface.oilSurfaceSmokeColor;
+                        break;
+                    default:
+                        Debug.LogError("Unknown surface type!");
                         break;
                 }
                 smoke.startColor = startColor;
                 smokeSystem.Play();
             } else {
-                smokeEmission.rateOverTime = 0;
                 smokeSystem.Stop();
             }
         }
