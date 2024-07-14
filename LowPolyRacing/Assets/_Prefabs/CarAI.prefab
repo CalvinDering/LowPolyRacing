@@ -4272,6 +4272,8 @@ GameObject:
   - component: {fileID: 1762226892042597829}
   - component: {fileID: 2120262355341739802}
   - component: {fileID: 6128966572117117222}
+  - component: {fileID: 875645953103966979}
+  - component: {fileID: 2065826444254490298}
   - component: {fileID: 1380191108948579881}
   - component: {fileID: 7283563429069622820}
   m_Layer: 7
@@ -4298,6 +4300,7 @@ Transform:
   - {fileID: 3698650530773608367}
   - {fileID: 2361666296420642832}
   - {fileID: 6651540182792583379}
+  - {fileID: 8065132322698155880}
   - {fileID: 7729044861028559042}
   - {fileID: 453678146034414494}
   m_Father: {fileID: 0}
@@ -4374,7 +4377,7 @@ MonoBehaviour:
   springTravel: 0.125
   wheelRadius: 0.38
   racer: {fileID: 0}
-  acceleration: 35
+  acceleration: 25
   maxSpeed: 100
   deceleration: 20
   steerStrength: 30
@@ -4420,6 +4423,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  dragWithNoInput: 1
+  dragTime: 2
   dragCoefficient: 2.5
   brakingDeceleration: 100
   brakingDragCoefficient: 0.5
@@ -4455,7 +4460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aiMode: 1
-  skillLevel: 0.8
+  skillLevel: 1
   speedCap: 100
   detectionRadius: 2
   maxDistance: 10
@@ -4466,6 +4471,36 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 128
+--- !u!114 &875645953103966979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6498965619865622158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b32142cc4ae180a449b976f0ca7a91f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surfaceLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  centerPoint: {fileID: 8065132322698155880}
+  extendSize: {x: 1.25, y: 0.5, z: 1.75}
+  updateDistance: 5
+--- !u!114 &2065826444254490298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6498965619865622158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aa18436f65ce1843b7edd50694d6961, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!82 &1380191108948579881
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6310,6 +6345,59 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &8693576339445292261
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8065132322698155880}
+  - component: {fileID: 1066821849172225625}
+  m_Layer: 7
+  m_Name: SurfaceDetectionPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8065132322698155880
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8693576339445292261}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.45, z: -0.185}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2863917611112643883}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1066821849172225625
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8693576339445292261}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 2.5, y: 1, z: 3.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8728079627569026517
 GameObject:

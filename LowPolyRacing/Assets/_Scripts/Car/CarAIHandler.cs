@@ -13,7 +13,7 @@ public class CarAIHandler : MonoBehaviour {
     [Header("AI Settings")]
     public AIMode aiMode;
     public float skillLevel = 1.0f;
-    public float speedCap = 100;
+    public float speedCap = 500;
     private float maxSpeed = 0;
     public float detectionRadius = 15f;
     public float maxDistance = 15f;

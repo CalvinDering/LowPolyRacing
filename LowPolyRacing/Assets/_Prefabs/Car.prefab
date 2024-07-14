@@ -5950,6 +5950,7 @@ GameObject:
   - component: {fileID: 5357216128450527739}
   - component: {fileID: 4221546617749091884}
   - component: {fileID: 3737176402864814209}
+  - component: {fileID: -6394303183535981472}
   - component: {fileID: 8757771772089505193}
   - component: {fileID: 4358184621738901830}
   - component: {fileID: 503330321942995823}
@@ -6058,7 +6059,7 @@ MonoBehaviour:
   springTravel: 0.125
   wheelRadius: 0.38
   racer: {fileID: 0}
-  acceleration: 35
+  acceleration: 25
   maxSpeed: 100
   deceleration: 20
   steerStrength: 30
@@ -6104,7 +6105,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  dragWithNoInput: 3
+  dragWithNoInput: 1
   dragTime: 2
   dragCoefficient: 2.5
   brakingDeceleration: 100
@@ -6224,6 +6225,18 @@ MonoBehaviour:
   centerPoint: {fileID: 3923696970538128167}
   extendSize: {x: 1.25, y: 0.5, z: 1.75}
   updateDistance: 5
+--- !u!114 &-6394303183535981472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455933390501970947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aa18436f65ce1843b7edd50694d6961, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8757771772089505193
 MonoBehaviour:
   m_ObjectHideFlags: 0

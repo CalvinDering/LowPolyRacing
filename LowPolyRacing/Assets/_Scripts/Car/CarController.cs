@@ -16,6 +16,7 @@ public class CarController : MonoBehaviour {
 
     private CarInputHandler inputHandler = null;
     private CarSurfaceHandler surfaceHandler;
+    private CarEffectHandler effectHandler;
 
     [SerializeField] private TrailRenderer[] skidMarks = new TrailRenderer[2];
     [SerializeField] private ParticleSystem[] skidSmokes = new ParticleSystem[2];
@@ -71,6 +72,7 @@ public class CarController : MonoBehaviour {
         carRB = GetComponent<Rigidbody>();
         playerUIStats = GetComponent<PlayerUIStats>();
         surfaceHandler = GetComponent<CarSurfaceHandler>();
+        effectHandler = GetComponent<CarEffectHandler>();
 
         if(gameObject.tag == "Player") {
             DontDestroyOnLoad(gameObject);
@@ -122,9 +124,11 @@ public class CarController : MonoBehaviour {
         if(isGrounded) {
             Acceleration();
             ForwardsDrag();
-            //Deceleration(); Disabled because it is basically forwards drag
+            Deceleration(); //Disabled because it is basically forwards drag
             Turn();
             SidewaysDrag();
+
+            SpeedBoostEffect();
         } else {
             DownwardsForce();
         }
@@ -137,7 +141,9 @@ public class CarController : MonoBehaviour {
     }
 
     private void Deceleration() {
-        carRB.AddForce((handbrakeActive ? brakingDeceleration : deceleration) * carVelocityRatio * -carRB.transform.forward, ForceMode.Acceleration);
+        if(handbrakeActive) {
+            carRB.AddForce((handbrakeActive ? brakingDeceleration : deceleration) * carVelocityRatio * -carRB.transform.forward, ForceMode.Acceleration);
+        }
     }
 
     private void Turn() {
@@ -208,6 +214,12 @@ public class CarController : MonoBehaviour {
         return currectCarLocalVelocity;
     }
 
+    private void SpeedBoostEffect() {
+        if(effectHandler.IsSpeedModifierActive()) {
+            carRB.AddForce(GetSpeedModifier() * transform.forward, ForceMode.Impulse);
+        }
+    }
+
     #endregion
 
     #region Input
@@ -251,6 +263,10 @@ public class CarController : MonoBehaviour {
 
     public Surface.SurfaceType GetSurface() {
         return surfaceHandler.GetCurrentSurface();
+    }
+
+    public float GetSpeedModifier() {
+        return effectHandler.GetSpeedModifier();
     }
 
     #endregion
