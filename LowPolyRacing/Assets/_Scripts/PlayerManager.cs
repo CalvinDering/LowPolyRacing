@@ -185,6 +185,7 @@ public class PlayerManager : MonoBehaviour {
         }
 
         player.transform.GetComponent<Rigidbody>().position = spawnpoints[playerIndex + aiRacerCount].position;
+        player.transform.GetComponent<Rigidbody>().rotation = spawnpoints[playerIndex + aiRacerCount].rotation;
 
         int layerToAdd = (int) Mathf.Log(playerLayers[playerIndex].value, 2);
 
