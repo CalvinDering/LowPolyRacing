@@ -82,6 +82,7 @@ public class CarController : MonoBehaviour {
         }
 
         TryGetComponent(out inputHandler);
+        SetIsActive(true);
     }
 
     private void FixedUpdate() {
@@ -96,7 +97,7 @@ public class CarController : MonoBehaviour {
     private void Update() {
 
         if(inputHandler != null) {
-            if(RaceController.Instance.IsRaceFinished() && inputHandler.exit.triggered) {
+            if(RaceController.Instance && RaceController.Instance.IsRaceFinished() && inputHandler.exit.triggered) {
                 SceneHandler.Instance.LoadTrackSelectionScene();
             }
         }        
@@ -124,7 +125,7 @@ public class CarController : MonoBehaviour {
         if(isGrounded) {
             Acceleration();
             ForwardsDrag();
-            //Deceleration(); Disabled because it is basically forwards drag
+            Deceleration(); //Disabled because it is basically forwards drag
             Turn();
             SidewaysDrag();
 
@@ -141,7 +142,9 @@ public class CarController : MonoBehaviour {
     }
 
     private void Deceleration() {
-        carRB.AddForce((handbrakeActive ? brakingDeceleration : deceleration) * carVelocityRatio * -carRB.transform.forward, ForceMode.Acceleration);
+        if(handbrakeActive) {
+            carRB.AddForce((handbrakeActive ? brakingDeceleration : deceleration) * carVelocityRatio * -carRB.transform.forward, ForceMode.Acceleration);
+        }
     }
 
     private void Turn() {
@@ -222,9 +225,9 @@ public class CarController : MonoBehaviour {
 
     #region Input
 
-    public void SetInput(Vector2 input) {
-        moveInput = input.x;
-        steerInput = input.y;
+    public void SetInput(Vector2 inputVector) {
+        moveInput = inputVector.x;
+        steerInput = inputVector.y;
     }
 
     private void SetZeroInput() {
