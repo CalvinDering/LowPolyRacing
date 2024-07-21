@@ -72,16 +72,11 @@ public class CarInputHandler : MonoBehaviour {
         accelerate.canceled += ReleaseAcceleration;
         steering.performed += ApplySteering;
         steering.canceled += ReleaseSteering;
-        clutch.performed += ApplyClutch;
-        clutch.canceled += ReleaseClutch;
         handbrake.performed += ApplyHandbrake;
         handbrake.canceled += ReleaseHandbrake;
 
         handbrake.started += context => carController.SetHandbrake(true);
         handbrake.canceled += context => carController.SetHandbrake(false);
-
-        //clutch.started += context => carController.SetClutch(true);
-        //clutch.canceled += context => carController.SetClutch(false);
 
         player.Enable();
     }
@@ -89,9 +84,6 @@ public class CarInputHandler : MonoBehaviour {
     private void OnDisable() {
         handbrake.started -= context => carController.SetHandbrake(true);
         handbrake.canceled -= context => carController.SetHandbrake(false);
-
-        //clutch.started -= context => carController.SetClutch(true);
-        //clutch.canceled -= context => carController.SetClutch(false);
 
         player.Disable();
     }
@@ -110,14 +102,6 @@ public class CarInputHandler : MonoBehaviour {
 
     private void ReleaseSteering(InputAction.CallbackContext value) {
         steeringInput = 0;
-    }
-
-    private void ApplyClutch(InputAction.CallbackContext value) {
-        clutchInput = value.ReadValue<float>();
-    }
-
-    private void ReleaseClutch(InputAction.CallbackContext value) {
-        clutchInput = 0;
     }
 
     private void ApplyHandbrake(InputAction.CallbackContext value) {
