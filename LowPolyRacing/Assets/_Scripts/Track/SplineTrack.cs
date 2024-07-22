@@ -11,10 +11,7 @@ public class SplineTrack : MonoBehaviour {
     private SplineContainer splineContainer;
     private Mesh mesh;
 
-    [SerializeField] private Material[] trackMaterials;
-
-    [SerializeField] private float roadWidth;
-    [SerializeField] private float resolution;
+    [SerializeField] private TrackPart[] trackParts;
 
     private float3 position;
     private float3 forward;
@@ -72,7 +69,12 @@ public class SplineTrack : MonoBehaviour {
         if(meshRenderer == null) {
             meshRenderer = gameObject.AddComponent<MeshRenderer>();
         }
-        meshRenderer.materials = trackMaterials;
+        Material[] combinedMaterials = new Material[splineContainer.Splines.Count];
+
+        for(int s = 0; s < splineContainer.Splines.Count; s++) {
+            combinedMaterials[s] = trackParts[s].trackMaterial;
+        }
+        meshRenderer.materials = combinedMaterials;
 
     }
 
@@ -82,8 +84,8 @@ public class SplineTrack : MonoBehaviour {
         vertsP2 = new List<Vector3>();
 
         for(int s = 0; s < splineContainer.Splines.Count; s++) {
-            float step = 1f / (float) resolution;
-            for(int i = 0; i < resolution; i++) {
+            float step = 1f / (float) trackParts[s].resolution;
+            for(int i = 0; i < trackParts[s].resolution; i++) {
                 float t = step * i;
 
                 SampleSplineWidth(s, t, out Vector3 p1, out Vector3 p2);
@@ -97,8 +99,8 @@ public class SplineTrack : MonoBehaviour {
         splineContainer.Evaluate(splineIndex, t, out position, out forward, out upVector);
 
         float3 right = Vector3.Cross(forward, upVector).normalized;
-        p1 = position + (right * roadWidth);
-        p2 = position + (-right * roadWidth);
+        p1 = position + (right * trackParts[splineIndex].roadWidth);
+        p2 = position + (-right * trackParts[splineIndex].roadWidth);
     }
 
     private void BuildMesh(int splineIndex, List<Vector3> verts, int[][] triDex) {
@@ -106,12 +108,15 @@ public class SplineTrack : MonoBehaviour {
         int offset = 0;
 
         int length = vertsP2.Count;
-        int splineCount = splineContainer.Splines.Count;
-        int amountPerSpline = length / splineCount;
-        int amountPerIndex = amountPerSpline * splineIndex;
-        int lengthPoint = amountPerIndex+ amountPerSpline;
+        int amountPerIndex = (int) trackParts[splineIndex].resolution;
 
-        for(int i = 1 + amountPerIndex; i <= lengthPoint; i++) {
+        int lengthPoint = 0;
+        for(int i = 0; i <= splineIndex; i++) {
+            lengthPoint += (int) trackParts[i].resolution;
+        }
+        int previousAmount = lengthPoint - amountPerIndex;
+
+        for(int i = 1 + previousAmount; i <= lengthPoint; i++) {
             Vector3 p1 = vertsP1[i - 1];
             Vector3 p2 = vertsP2[i - 1];
             Vector3 p3;
@@ -147,4 +152,13 @@ public class SplineTrack : MonoBehaviour {
 public class VertexWidth {
     public int knotIndex;
     public float vertexWidth;
+}
+
+[System.Serializable]
+public class TrackPart {
+
+    public Material trackMaterial;
+
+    public float roadWidth;
+    public float resolution;
 }
