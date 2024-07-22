@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.Splines;
+using UnityEditor.Splines;
 
 [CustomEditor(typeof(SplineTrack))]
 public class RebuildEditorButton : Editor {

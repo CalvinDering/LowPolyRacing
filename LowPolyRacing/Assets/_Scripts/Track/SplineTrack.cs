@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;
@@ -8,13 +9,13 @@ using UnityEngine.Splines;
 public class SplineTrack : MonoBehaviour {
 
     private SplineContainer splineContainer;
+    private Mesh mesh;
 
-    [SerializeField] private Material roadMaterial;
+    [SerializeField] private Material[] trackMaterials;
 
     [SerializeField] private float roadWidth;
     [SerializeField] private float resolution;
 
-    private int splineIndex;
     private float3 position;
     private float3 forward;
     private float3 upVector;
@@ -25,7 +26,7 @@ public class SplineTrack : MonoBehaviour {
     private void OnEnable() {
         splineContainer = GetComponent<SplineContainer>();
         Spline.Changed += OnSplineChanged;
-        GetVerts();
+        Rebuild();
     }
 
     private void OnDisable() {
@@ -33,8 +34,46 @@ public class SplineTrack : MonoBehaviour {
     }
 
     private void OnSplineChanged(Spline arg1, int arg2, SplineModification arg3) {
+        Rebuild();
+    }
+
+    public void Rebuild() {
+        mesh = new Mesh();
+        List<Vector3> verts = new List<Vector3>();
+
+        vertsP1 = new List<Vector3>();
+        vertsP2 = new List<Vector3>();
         GetVerts();
-        BuildMesh();
+
+        mesh.subMeshCount = splineContainer.Splines.Count;
+        int[][] triDex = new int[splineContainer.Splines.Count][];
+        for(int s = 0; s < splineContainer.Splines.Count; s++) {
+            BuildMesh(s, verts, triDex);
+        }
+
+        mesh.SetVertices(verts);
+        for(int s = 0; s < splineContainer.Splines.Count; s++) {
+            mesh.SetTriangles(triDex[s], s);
+        }
+
+        MeshFilter meshFilter = GetComponent<MeshFilter>();
+        if(meshFilter == null) {
+            meshFilter = gameObject.AddComponent<MeshFilter>();
+        }
+        meshFilter.mesh = mesh;
+
+        MeshCollider meshCollider = GetComponent<MeshCollider>();
+        if(meshCollider == null) {
+            meshCollider = gameObject.AddComponent<MeshCollider>();
+        }
+        meshCollider.sharedMesh = mesh;
+
+        MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+        if(meshRenderer == null) {
+            meshRenderer = gameObject.AddComponent<MeshRenderer>();
+        }
+        meshRenderer.materials = trackMaterials;
+
     }
 
     private void GetVerts() {
@@ -42,16 +81,19 @@ public class SplineTrack : MonoBehaviour {
         vertsP1 = new List<Vector3>();
         vertsP2 = new List<Vector3>();
 
-        float step = 1f / (float) resolution;
-        for(int i = 0; i < resolution; i++) {
-            float t = step * i;
-            SampleSplineWidth(t, out Vector3 p1, out Vector3 p2);
-            vertsP1.Add(p1);
-            vertsP2.Add(p2);
+        for(int s = 0; s < splineContainer.Splines.Count; s++) {
+            float step = 1f / (float) resolution;
+            for(int i = 0; i < resolution; i++) {
+                float t = step * i;
+
+                SampleSplineWidth(s, t, out Vector3 p1, out Vector3 p2);
+                vertsP1.Add(p1);
+                vertsP2.Add(p2);
+            }
         }
     }
 
-    private void SampleSplineWidth(float t, out Vector3 p1, out Vector3 p2) {
+    private void SampleSplineWidth(int splineIndex, float t, out Vector3 p1, out Vector3 p2) {
         splineContainer.Evaluate(splineIndex, t, out position, out forward, out upVector);
 
         float3 right = Vector3.Cross(forward, upVector).normalized;
@@ -59,15 +101,17 @@ public class SplineTrack : MonoBehaviour {
         p2 = position + (-right * roadWidth);
     }
 
-    private void BuildMesh() {
-        Mesh mesh = new Mesh();
-        List<Vector3> verts = new List<Vector3>();
+    private void BuildMesh(int splineIndex, List<Vector3> verts, int[][] triDex) {
         List<int> tris = new List<int>();
         int offset = 0;
 
         int length = vertsP2.Count;
+        int splineCount = splineContainer.Splines.Count;
+        int amountPerSpline = length / splineCount;
+        int amountPerIndex = amountPerSpline * splineIndex;
+        int lengthPoint = amountPerIndex+ amountPerSpline;
 
-        for(int i = 1; i <= length; i++) {
+        for(int i = 1 + amountPerIndex; i <= lengthPoint; i++) {
             Vector3 p1 = vertsP1[i - 1];
             Vector3 p2 = vertsP2[i - 1];
             Vector3 p3;
@@ -94,35 +138,13 @@ public class SplineTrack : MonoBehaviour {
             verts.AddRange(new List<Vector3> { p1, p2, p3, p4 });
             tris.AddRange(new List<int> { t1, t2, t3, t4, t5, t6 });
         }
-
-        mesh.SetVertices(verts);
-        mesh.SetTriangles(tris, 0);
-
-        MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
-        if(meshRenderer == null) {
-            gameObject.AddComponent<MeshRenderer>().material = roadMaterial;
-        } else {
-            meshRenderer.material = roadMaterial;
-        }
-        
-        MeshFilter meshFilter = GetComponent<MeshFilter>();
-        if(meshFilter == null) {
-            gameObject.AddComponent<MeshFilter>().sharedMesh = mesh;
-        } else {
-            meshFilter.sharedMesh = mesh;
-        }
-        
-        MeshCollider meshCollider = GetComponent<MeshCollider>();
-        if(meshCollider == null) {
-            gameObject.AddComponent<MeshCollider>().sharedMesh = mesh;
-        } else {
-            meshCollider.sharedMesh = mesh;
-        }
+        triDex[splineIndex] = tris.ToArray();
     }
 
-    public void Rebuild() {
-        GetVerts();
-        BuildMesh();
-    }
+}
 
+[System.Serializable]
+public class VertexWidth {
+    public int knotIndex;
+    public float vertexWidth;
 }
