@@ -26,7 +26,6 @@ public class SplineTrack : MonoBehaviour {
     [SerializeField] private bool createDownVerticies = false;
 
     [SerializeField] private float roadHeight = 2f;
-    [SerializeField] private Vector3 roadAngleVector = new Vector3(1, 1, 1);
 
     private void OnEnable() {
         splineContainer = GetComponent<SplineContainer>();
@@ -109,7 +108,6 @@ public class SplineTrack : MonoBehaviour {
         splineContainer.Evaluate(splineIndex, t, out position, out forward, out upVector);
 
         float3 right = Vector3.Cross(forward, upVector).normalized;
-        //float3 angleLeft = Vector3.Normalize(right * -upVector);
         p1 = position + (right * trackParts[splineIndex].roadWidth);
         p2 = position + (-right * trackParts[splineIndex].roadWidth);
 
