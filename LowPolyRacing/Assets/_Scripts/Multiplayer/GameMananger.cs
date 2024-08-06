@@ -6,6 +6,11 @@ public class GameMananger : MonoBehaviour {
 
     public static GameMananger Instance;
 
+    public bool connected;
+    public bool inGame;
+    public bool isHost;
+    public ulong clientId;
+
     public int maxMemberLobbySize = 4;
 
     private void Awake() {
@@ -16,11 +21,6 @@ public class GameMananger : MonoBehaviour {
             DontDestroyOnLoad(gameObject);
         }
     }
-
-    public bool connected;
-    public bool inGame;
-    public bool isHost;
-    public ulong clientId;
 
     public void HostCreated() {
         isHost = true;
