@@ -152,6 +152,8 @@ public class TrackSelectionUIHandler : MonoBehaviour {
     public void CreateLobby() {
         SteamNetworkManager.Instance.CreateLobby();
 
+        //add player to PlayerManager
+
         playerDisplay.SetActive(true);
         trackDisplay.SetActive(true);
         lobbyBrowser.SetActive(false);
