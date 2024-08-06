@@ -7,6 +7,12 @@ using UnityEngine.UI;
 
 public class TrackSelectionUIHandler : MonoBehaviour {
 
+    [SerializeField] private GameObject lobbyButtons;
+    [SerializeField] private GameObject menuButtons;
+    [SerializeField] private GameObject trackDisplay;
+    [SerializeField] private GameObject lobbyBrowser;
+    [SerializeField] private GameObject lobbyBrowserSlotPrefab;
+    [SerializeField] private GameObject playerDisplay;
     [SerializeField] private TrackSO[] trackList;
     [SerializeField] private TextMeshProUGUI selectedTrackName;
     [SerializeField] private Image selectedTrackImage;
@@ -15,6 +21,8 @@ public class TrackSelectionUIHandler : MonoBehaviour {
     [SerializeField] private Transform[] playerSlots;
     [SerializeField] private string joinMessage;
 
+    private List<LobbyBrowserSlot> lobbies;
+    private int lobbyIndex;
     private int selectedTrackId = 0;
     private int selectedTrackLaps = 3;
     private int aiRacerCount = 0;
@@ -29,8 +37,16 @@ public class TrackSelectionUIHandler : MonoBehaviour {
         Instance = this;
         //DontDestroyOnLoad(gameObject);
 
+        lobbies = new();
+        RefreshLobbies();
         SetupPlayerSlots();
         UpdateTrackDisplay();
+
+        playerDisplay.SetActive(false);
+        trackDisplay.SetActive(false);
+        lobbyBrowser.SetActive(false);
+        lobbyButtons.SetActive(true);
+        menuButtons.SetActive(false);
     }
 
     private void SetupPlayerSlots() {
@@ -131,6 +147,74 @@ public class TrackSelectionUIHandler : MonoBehaviour {
     public void RemovePlayerDisplay(int playerId) {
         PlayerSlot playerSlot = playerSlots[playerId].GetComponent<PlayerSlot>();
         playerSlot.SetPlayerName(joinMessage);
+    }
+
+    public void CreateLobby() {
+        SteamNetworkManager.Instance.CreateLobby();
+
+        playerDisplay.SetActive(true);
+        trackDisplay.SetActive(true);
+        lobbyBrowser.SetActive(false);
+        lobbyButtons.SetActive(false);
+        menuButtons.SetActive(true);
+    }
+
+    public void JoinLobby() {
+        if(lobbyIndex < 0 || lobbyIndex > SteamNetworkManager.Instance.activeLobbies.Count) {
+            Debug.Log("Can not join lobby. Invalid lobby index");
+            return;
+        } else {
+            SteamNetworkManager.Instance.JoinLobby(lobbyIndex);
+
+            playerDisplay.SetActive(true);
+            trackDisplay.SetActive(true);
+            lobbyBrowser.SetActive(false);
+            lobbyButtons.SetActive(false);
+            menuButtons.SetActive(true);
+        }
+    }
+
+    public void ExitLobby() {
+        SteamNetworkManager.Instance.Disconnect();
+
+        HideLobbyBrowser();
+    }
+
+    public void HideLobbyBrowser() {
+        playerDisplay.SetActive(false);
+        trackDisplay.SetActive(false);
+        lobbyBrowser.SetActive(false);
+        lobbyButtons.SetActive(true);
+        menuButtons.SetActive(false);
+    }
+
+    public void SetLobbyIndex(int index) {
+        lobbyIndex = index;
+    }
+
+    public void RefreshLobbies() {
+        SteamNetworkManager.Instance.GetLobbies();
+        foreach(LobbyBrowserSlot lobbyBrowserSlot in lobbies) {
+            Destroy(lobbyBrowserSlot.gameObject);
+        }
+        lobbies = new();
+
+        for(int i = 0; i < SteamNetworkManager.Instance.activeLobbies.Count; i++) {
+            Steamworks.Data.Lobby lobby = SteamNetworkManager.Instance.activeLobbies[i];
+            string lobbyName = lobby.GetData("lobbyName");
+            string lobbyOwner = lobby.GetData("lobbyOwner");
+
+            GameObject lobbyBrowserSlotObject = Instantiate(lobbyBrowserSlotPrefab, lobbyBrowser.transform);
+            LobbyBrowserSlot lobbyBrowserSlot = lobbyBrowserSlotObject.GetComponent<LobbyBrowserSlot>();
+            lobbyBrowserSlot.SetValues(lobbyName, lobbyOwner, lobby.MemberCount, lobby.MaxMembers, i);
+            lobbies.Add(lobbyBrowserSlot);
+        }
+
+        playerDisplay.SetActive(false);
+        trackDisplay.SetActive(false);
+        lobbyBrowser.SetActive(true);
+        lobbyButtons.SetActive(true);
+        menuButtons.SetActive(false);
     }
 
     public void StartGame() {

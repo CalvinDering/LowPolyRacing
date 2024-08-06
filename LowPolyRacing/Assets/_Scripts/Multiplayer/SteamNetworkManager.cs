@@ -19,7 +19,7 @@ public class SteamNetworkManager : MonoBehaviour {
         get; private set;
     }
 
-    private List<Lobby> activeLobbies;
+    public List<Lobby> activeLobbies;
 
     public ulong hostId;
 
